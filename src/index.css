@@ -1,13 +1,61 @@
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  color: #343538;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+/* IconButton styles */
+.icon-btn {
+  padding: 0px;
+  margin: 0px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.main-btn {
+  width: 100%;
+  height: 55px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2f7cf6;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+
+.text-btn {
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2f7cf6;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.text-btn-disabled {
+  color: #A7A7A7;
+  cursor: default;
 }

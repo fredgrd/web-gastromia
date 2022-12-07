@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { useDispatch } from "react-redux";
+import { useGetUserQuery } from "./app/services/gastromia";
+import { setCredentials } from "./features/auth/authSlice";
+
+import Header from "./features/header";
+import AuthModal from "./features/auth/authModal";
 
 function App() {
+  const dispatch = useDispatch();
+  const { data, error } = useGetUserQuery();
+  const [authModal, setAuthModal] = useState<boolean>(true);
+
+  console.log(error);
+
+  if (data) {
+    dispatch(setCredentials({ user: data }));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <AuthModal isOpen={authModal} onClose={() => setAuthModal(false)} />
     </div>
   );
 }
