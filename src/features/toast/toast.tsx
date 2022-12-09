@@ -24,7 +24,7 @@ const Toast: React.FC<{
     return () => {
       clearTimeout(timeout);
     };
-  }, [duration, onDone]);
+  }, []);
 
   return (
     <ReactPortal wrapperId="portal">

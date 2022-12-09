@@ -161,3 +161,34 @@
 .auth-modal-codeinput::placeholder {
   font-weight: 400;
 }
+
+.auth-modal-name-content {
+  display: flex;
+  align-items: center;
+  height: 55px;
+  width: 100%;
+  border: 1px solid #343538;
+  border-radius: 10px;
+}
+
+.auth-modal-nameinput,
+.auth-modal-nameinput:focus {
+  padding: 0px 16px;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: #343538;
+  -moz-appearance: none; /* older firefox */
+  -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
+  appearance: none; /* rest */
+  outline: none;
+}
+
+.auth-modal-nameinput::placeholder {
+  font-weight: 400;
+}
+
+.auth-modal-nameinput-donebtn {
+  margin-top: 16px;
+}

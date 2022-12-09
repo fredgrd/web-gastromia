@@ -1,22 +1,30 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useGetUserQuery } from "./app/services/gastromia";
 import { setCredentials } from "./features/auth/authSlice";
+import "./App.css";
+
+import { getUser } from "./app/services/gastromiaApi";
 
 import Header from "./features/header";
-import AuthModal from "./features/auth/authModal";
+import AuthModal from "./features/auth/authModal/authModal";
 
 function App() {
   const dispatch = useDispatch();
-  const { data, error } = useGetUserQuery();
   const [authModal, setAuthModal] = useState<boolean>(true);
 
-  console.log(error);
+  const getUserOnLoad = useCallback(async () => {
+    const result = await getUser();
 
-  if (data) {
-    dispatch(setCredentials({ user: data }));
-  }
+    if (result.user) {
+      dispatch(setCredentials({ user: result.user }));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("I have fired once");
+
+    getUserOnLoad();
+  }, [getUserOnLoad]);
 
   return (
     <div className="App">
