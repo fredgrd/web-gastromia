@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../app/services/gastromia";
+import { User } from "../../app/services/gastromiaApi";
 import { RootState } from "../../app/store";
 
 interface AuthState {
