@@ -144,6 +144,7 @@ const CodeInput: React.FC<{
             onClick={onClick}
             options={{
               title: "Continua",
+              buttonColor: undefined,
               showButton: !isLoading,
               showSpinner: isLoading,
             }}

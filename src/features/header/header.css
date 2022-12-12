@@ -7,11 +7,11 @@
   grid-template-columns: 60px auto 60px 60px;
   grid-template-rows: 44px 44px;
   grid-template-areas:
-    "drawerbutton . . cartbutton"
+    "drawerbutton logo authbutton cartbutton"
     ". . . .";
 }
 
-.header-drawerbtn {
+.header-menubtn {
   position: relative;
   top: calc(50% - 16px);
   height: 32px;
@@ -23,9 +23,24 @@
   cursor: pointer;
 }
 
-.header-drawerbtn-icnbox {
+.header-authbtn {
+  position: relative;
+  top: calc(50% - 16px);
+  height: 32px;
   width: 100%;
-  height: 100%;
+
+  border: none;
+  border-radius: 16px;
+  background-color: #ff0063;
+
+  grid-area: authbutton;
+  cursor: pointer;
+}
+
+.header-authbtn-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
 }
 
 .headercartbutton {

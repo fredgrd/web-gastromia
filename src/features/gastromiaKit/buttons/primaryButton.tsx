@@ -7,6 +7,7 @@ const PrimaryButton: React.FC<{
   onClick: () => void;
   options: {
     title: string;
+    buttonColor: string | undefined;
     showButton: boolean;
     showSpinner: boolean;
   };
@@ -14,7 +15,13 @@ const PrimaryButton: React.FC<{
   return (
     <div className="gastromiakit-primarybutton-content">
       {options.showButton && (
-        <button className="gastromiakit-primarybutton-button" onClick={onClick}>
+        <button
+          className="gastromiakit-primarybutton-button"
+          style={
+            options.buttonColor ? { backgroundColor: options.buttonColor } : {}
+          }
+          onClick={onClick}
+        >
           {options.title}
         </button>
       )}
