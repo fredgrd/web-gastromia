@@ -1,4 +1,4 @@
-.menudrawer {
+.cartdrawer {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -7,18 +7,18 @@
   background-color: rgba(0, 0, 0, 0.24);
 }
 
-.menudrawer-enter {
-  animation: menudrawer-enter-animation;
+.cartdrawer-enter {
+  animation: cartdrawer-enter-animation;
   animation-duration: 0.2s;
 }
 
-.menudrawer-exit {
-  animation: menudrawer-exit-animation;
+.cartdrawer-exit {
+  animation: cartdrawer-exit-animation;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
 
-@keyframes menudrawer-enter-animation {
+@keyframes cartdrawer-enter-animation {
   from {
     background-color: rgba(0, 0, 0, 0);
   }
@@ -28,7 +28,7 @@
   }
 }
 
-@keyframes menudrawer-exit-animation {
+@keyframes cartdrawer-exit-animation {
   from {
     background-color: rgba(0, 0, 0, 0.24);
   }
@@ -38,54 +38,54 @@
   }
 }
 
-.menudrawer-content {
+.cartdrawer-content {
   position: relative;
   top: 0px;
-  left: 0px;
-  width: 260px;
+  right: 0px;
+  width: 100%;
   height: 100%;
   background-color: white;
   box-shadow: rgb(0 0 0 / 16%) 0px 0px 16px;
 }
 
-.menudrawer-content-enter {
-  animation: menudrawer-content-enter-animation;
+.cartdrawer-content-enter {
+  animation: cartdrawer-content-enter-animation;
   animation-duration: 0.2s;
 }
 
-.menudrawer-content-exit {
-  animation: menudrawer-content-exit-animation;
+.cartdrawer-content-exit {
+  animation: cartdrawer-content-exit-animation;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
 
-@keyframes menudrawer-content-enter-animation {
+@keyframes cartdrawer-content-enter-animation {
   from {
-    left: -260px;
+    right: -100%;
   }
 
   to {
-    left: 0px;
+    right: 0px;
   }
 }
 
-@keyframes menudrawer-content-exit-animation {
+@keyframes cartdrawer-content-exit-animation {
   from {
-    left: 0px;
+    right: 0px;
   }
 
   to {
-    left: -260px;
+    right: -100%;
   }
 }
 
-.menudrawer-header {
+.cartdrawer-header {
   display: flex;
   flex-direction: column;
   padding: 24px 12px 0px 12px;
 }
 
-.menudrawer-button {
+.cartdrawer-button {
   height: 40px;
   display: flex;
   align-items: center;
@@ -102,35 +102,35 @@
   background-color: white;
 }
 
-.menudrawer-button:active {
+.cartdrawer-button:active {
   background-color: #f6f7f8;
 }
 
-.menudrawer-button-title {
+.cartdrawer-button-title {
   margin: 0px 0px 0px 8px;
 
   font-weight: 600;
 }
 
-.menudrawer-break {
+.cartdrawer-break {
   margin: 12px;
   border-top: 1px solid rgb(232, 233, 235);
 }
 
-.menudrawer-maincontents {
+.cartdrawer-maincontents {
   display: flex;
   flex-direction: column;
   padding: 0px 12px;
 }
 
-.menudrawer-sectiontitle {
+.cartdrawer-sectiontitle {
   margin: 0px 12px;
 
   font-size: 12px;
   color: #72767e;
 }
 
-.menudrawer-footer {
+.cartdrawer-footer {
   display: flex;
 
   padding: 0px 12px;
@@ -140,6 +140,6 @@
   color: #72767e;
 }
 
-.menudrawer-footer-item {
+.cartdrawer-footer-item {
   padding: 0px 4px;
 }

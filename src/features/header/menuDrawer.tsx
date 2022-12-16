@@ -19,9 +19,9 @@ const DrawerButton: React.FC<{
   options: { title: string; style: React.CSSProperties | undefined };
 }> = ({ children, onClick, options }) => {
   return (
-    <button className="drawermodal-button" style={options.style}>
+    <button className="menudrawer-button" style={options.style}>
       {children}
-      <span className="drawermodal-button-title">{options.title}</span>
+      <span className="menudrawer-button-title">{options.title}</span>
     </button>
   );
 };
@@ -31,8 +31,8 @@ enum DrawerState {
   Hidden,
 }
 
-const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
-  show,
+const MenuDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+  isOpen,
   onClose,
 }) => {
   const [drawerState, setDrawerState] = useState<DrawerState>(
@@ -54,29 +54,37 @@ const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
     return () => clearTimeout(timeout);
   }, [drawerState]);
 
-  if (!show) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [isOpen]);
+
+  if (!isOpen) {
     return null;
   }
 
   return (
     <ReactPortal wrapperId="portal">
       <div
-        id="drawermodal"
-        className={`drawermodal ${
+        id="menudrawer"
+        className={`menudrawer ${
           drawerState === DrawerState.Visible
-            ? "drawermodal-enter"
-            : "drawermodal-exit"
+            ? "menudrawer-enter"
+            : "menudrawer-exit"
         }`}
       >
         <div
-          className={`drawermodal-content ${
+          className={`menudrawer-content ${
             drawerState === DrawerState.Visible
-              ? "drawermodal-content-enter"
-              : "drawermodal-content-exit"
+              ? "menudrawer-content-enter"
+              : "menudrawer-content-exit"
           }`}
           ref={drawerRef}
         >
-          <div className="drawermodal-header">
+          <div className="menudrawer-header">
             <PrimaryButton
               onClick={() => console.log("login")}
               options={{
@@ -98,9 +106,9 @@ const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
             </DrawerButton>
           </div>
 
-          <hr className="drawermodal-break" />
+          <hr className="menudrawer-break" />
 
-          <div className="drawermodal-maincontents">
+          <div className="menudrawer-maincontents">
             <DrawerButton
               onClick={() => console.log("clicked")}
               options={{
@@ -131,9 +139,9 @@ const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
               <CoffeeIcon fill="#343538" />
             </DrawerButton>
 
-            <hr className="drawermodal-break" />
+            <hr className="menudrawer-break" />
 
-            <h2 className="drawermodal-sectiontitle">Info</h2>
+            <h2 className="menudrawer-sectiontitle">Info</h2>
 
             <DrawerButton
               onClick={() => console.log("clicked")}
@@ -155,9 +163,9 @@ const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
               <PaymentsIcon fill="#343538" />
             </DrawerButton>
 
-            <hr className="drawermodal-break" />
+            <hr className="menudrawer-break" />
 
-            <h2 className="drawermodal-sectiontitle">Supporto</h2>
+            <h2 className="menudrawer-sectiontitle">Supporto</h2>
 
             <DrawerButton
               onClick={() => console.log("clicked")}
@@ -179,14 +187,14 @@ const MenuDrawer: React.FC<{ show: boolean; onClose: () => void }> = ({
               <FaqIcon fill="#343538" />
             </DrawerButton>
 
-            <hr className="drawermodal-break" />
+            <hr className="menudrawer-break" />
 
-            <div className="drawermodal-footer">
-              <a className="drawermodal-footer-item">Jobs</a>
+            <div className="menudrawer-footer">
+              <a className="menudrawer-footer-item">Jobs</a>
               <span>&nbsp;·&nbsp;</span>
-              <a className="drawermodal-footer-item">Termini</a>
+              <a className="menudrawer-footer-item">Termini</a>
               <span>&nbsp;·&nbsp;</span>
-              <a className="drawermodal-footer-item">Privacy</a>
+              <a className="menudrawer-footer-item">Privacy</a>
             </div>
           </div>
         </div>
