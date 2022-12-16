@@ -5,7 +5,7 @@ import "./App.css";
 
 import { getUser } from "./app/services/gastromiaApi";
 
-import Header from "./features/header";
+import Header from "./features/header/header";
 import AuthModal from "./features/auth/authModal/authModal";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <AuthModal isOpen={authModal} onClose={() => setAuthModal(false)} />
+      {/* <AuthModal isOpen={authModal} onClose={() => setAuthModal(false)} /> */}
     </div>
   );
 }

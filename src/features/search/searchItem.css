@@ -1,0 +1,90 @@
+.searchitem-content {
+  display: flex;
+  padding: 8px 0px;
+}
+
+.searchitem-image {
+  height: 60px;
+  width: 60px;
+
+  object-fit: cover;
+  
+  border-radius: 5px;
+}
+
+.searchitem-infos {
+  display: flex;
+  flex-direction: column;
+
+  padding: 8px 0px 10px 12px;
+}
+
+.searchitem-name {
+  font-size: 16;
+  font-weight: 600;
+}
+
+.searchitem-priceanddiscount {
+  display: flex;
+}
+
+.searchitem-price-content {
+  display: flex;
+  align-items: center;
+
+  margin-top: 4px;
+  padding: 2px 6px;
+
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.searchitem-price {
+  display: inline-block;
+  line-height: 14px;
+
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+}
+
+.searchitem-discount-content {
+  display: flex;
+  align-items: center;
+
+  margin-left: 4px;
+  margin-top: 4px;
+  padding: 2px 3px;
+
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.searchitem-discount-price {
+  display: inline-block;
+  line-height: 14px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  text-decoration: line-through;
+}
+
+.searchitem-discount-tag {
+  display: flex;
+  align-items: center;
+
+  margin-left: 3px;
+  padding: 3px;
+
+  border-radius: 30px;
+  background-color: #ffe676;
+}
+
+.searchitem-discount-tag-title {
+  display: inline-block;
+  line-height: 10px;
+
+  font-size: 10px;
+  font-weight: 700;
+}

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./authModal.css";
 
 import ReactPortal from "../../reactPortal/reactPortal";
@@ -13,10 +13,18 @@ enum AuthStep {
   Name,
 }
 
-const AuthModal: FC<{ isOpen: boolean; onClose: () => void }> = ({
+enum AuthModalState {
+  Visible,
+  Hidden,
+}
+
+const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose,
 }) => {
+  const [authModalState, setAuthModalState] = useState<AuthModalState>(
+    AuthModalState.Visible
+  );
   const [authStep, setAuthStep] = useState<AuthStep>(AuthStep.Number);
   const [number, setNumber] = useState<string>("");
   const [toastState, setToastState] = useState<ToastState>({
@@ -24,10 +32,27 @@ const AuthModal: FC<{ isOpen: boolean; onClose: () => void }> = ({
     message: "",
   });
 
-  if (isOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "visible";
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined;
+    if (authModalState === AuthModalState.Hidden) {
+      timeout = setTimeout(() => {
+        setAuthModalState(AuthModalState.Visible);
+        onClose();
+      }, 200);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [authModalState]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }, [isOpen]);
+
+  if (!isOpen) {
     return null;
   }
 
@@ -36,7 +61,7 @@ const AuthModal: FC<{ isOpen: boolean; onClose: () => void }> = ({
       case AuthStep.Number:
         return (
           <NumberInput
-            onClose={onClose}
+            onClose={() => setAuthModalState(AuthModalState.Hidden)}
             onDone={(number) => {
               setNumber(number);
               setAuthStep(AuthStep.Code);
@@ -53,14 +78,30 @@ const AuthModal: FC<{ isOpen: boolean; onClose: () => void }> = ({
           />
         );
       case AuthStep.Name:
-        return <NameInput onDone={onClose} />;
+        return (
+          <NameInput onDone={() => setAuthModalState(AuthModalState.Hidden)} />
+        );
     }
   };
 
   return (
     <ReactPortal wrapperId="portal">
-      <div className="auth-modal">
-        <div className="auth-modal-content">{renderSwitch(authStep)}</div>
+      <div
+        className={`auth-modal ${
+          authModalState === AuthModalState.Visible
+            ? "auth-modal-enter"
+            : "auth-modal-exit"
+        }`}
+      >
+        <div
+          className={`auth-modal-content ${
+            authModalState === AuthModalState.Visible
+              ? "auth-modal-content-enter"
+              : "auth-modal-content-exit"
+          }`}
+        >
+          {renderSwitch(authStep)}
+        </div>
       </div>
 
       {toastState.show && (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./toast.css";
 
 import ReactPortal from "../reactPortal/reactPortal";
@@ -16,15 +16,17 @@ const Toast: React.FC<{
 }> = ({ message, duration, onDone }) => {
   // Timer for 3seconds
 
+  const cachedOnDone = useCallback(onDone, [onDone]);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
-      onDone();
+      cachedOnDone();
     }, duration);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, []);
+  }, [cachedOnDone, duration]);
 
   return (
     <ReactPortal wrapperId="portal">

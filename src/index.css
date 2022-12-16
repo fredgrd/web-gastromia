@@ -4,6 +4,14 @@
   box-sizing: border-box; /* Opera/IE 8+ */
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -12,6 +20,8 @@ body {
   color: #343538;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
 
 code {
@@ -24,6 +34,20 @@ input {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+/* #portal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+} */
 
 /* IconButton styles */
 .icon-btn {
@@ -56,6 +80,6 @@ input {
 }
 
 .text-btn-disabled {
-  color: #A7A7A7;
+  color: #a7a7a7;
   cursor: default;
 }
