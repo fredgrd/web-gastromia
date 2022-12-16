@@ -46,9 +46,9 @@ const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflow = "visible";
+      document.body.style.overflowY = "scroll";
     }
   }, [isOpen]);
 

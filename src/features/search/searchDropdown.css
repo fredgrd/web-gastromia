@@ -1,0 +1,105 @@
+.searchdropdown-content {
+  position: relative;
+  margin-top: 16px;
+  height: 40px;
+}
+
+.searchdropdown-searchbar {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.searchdropdown-searchbar-input {
+  height: 100%;
+  width: 100%;
+
+  border: none;
+  border-radius: 8px;
+  background-color: #f6f7f8;
+
+  padding: 0px 16px;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.searchdropdown-searchbar-input::placeholder {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #343538;
+}
+
+.searchdropdown-searchbar-searchbtn {
+  position: absolute;
+  top: 0px;
+  right: 6px;
+
+  height: 40px;
+  width: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px;
+
+  border: none;
+  background-color: transparent;
+}
+
+.searchdropdown-dropdown-content {
+  margin-top: 8px;
+  padding: 0px 16px 8px 16px;
+}
+
+.searchdropdown-dropdown-popular-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.searchdropdown-dropdown-popular-categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+
+  margin: 0px;
+  padding: 0px;
+
+  list-style: none;
+}
+
+.searchdropdown-dropdown-popular-category {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+
+  border-radius: 12px;
+  background-color: #f6f7f8;
+
+  cursor: pointer;
+}
+
+.searchdropdown-dropdown-popular-category-logo {
+  height: 48px;
+  width: 48px;
+}
+
+.searchdropdown-dropdown-popular-category-title {
+  margin-left: 12px;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.searchdropdown-dropdown-results {
+  margin: 0px;
+  padding: 0px;
+
+  list-style: none;
+}
