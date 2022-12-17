@@ -1,27 +1,33 @@
 import React from "react";
+import { Item } from "../../app/services/gastromiaApi";
 import "./searchItem.css";
 
-const SearchItem = () => {
+const SearchItem: React.FC<{ item: Item }> = ({ item }) => {
   return (
     <a className="searchitem-content">
-      <img
-        className="searchitem-image"
-        src="https://dzfokbljn6tmk.cloudfront.net/items/8350d4110970735-media.jpg"
-      />
+      <img className="searchitem-image" src={item.preview_url} />
       <div className="searchitem-infos">
-        <span className="searchitem-name">Pita Chicken</span>
+        <span className="searchitem-name">{item.name}</span>
 
         <div className="searchitem-priceanddiscount">
           <div className="searchitem-price-content">
-            <span className="searchitem-price">6.50 €</span>
+            <span className="searchitem-price">{`${(item.price / 1000).toFixed(
+              2
+            )} €`}</span>
           </div>
 
-          <div className="searchitem-discount-content">
-            <span className="searchitem-discount-price">6.50 €</span>
-            <div className="searchitem-discount-tag">
-              <span className="searchitem-discount-tag-title">-20%</span>
+          {item.discount ? (
+            <div className="searchitem-discount-content">
+              <span className="searchitem-discount-price">
+                {`${(item.discount_price / 1000).toFixed(2)} €`}
+              </span>
+              <div className="searchitem-discount-tag">
+                <span className="searchitem-discount-tag-title">
+                  {item.discount_label}
+                </span>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </div>
     </a>

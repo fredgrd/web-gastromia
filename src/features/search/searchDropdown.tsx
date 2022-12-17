@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Item, searchItems } from "../../app/services/gastromiaApi";
 import "./searchDropdown.css";
 
 import { ReactComponent as SearchIcon } from "../../assets/search@20px.svg";
@@ -61,6 +62,7 @@ enum DropdownType {
 
 const SearchDropdown: React.FC = () => {
   const [query, setQuery] = useState<string>("");
+  const [queryResults, setQueryResults] = useState<Item[]>([]);
   const [showSearchButton, setShowSearchButton] = useState<boolean>(true);
   const [dropdown, setDropdown] = useState<DropdownType>(DropdownType.Populars);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,6 +71,22 @@ const SearchDropdown: React.FC = () => {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  // Handle search events
+  useEffect(() => {
+    const search = async () => {
+      console.log(query);
+      const result = await searchItems(query);
+
+      if (result.items && result.items.length) {
+        setQueryResults(result.items);
+      } else {
+        setQueryResults([]);
+      }
+    };
+
+    search();
+  }, [query]);
 
   const searchOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length) {
@@ -146,8 +164,8 @@ const SearchDropdown: React.FC = () => {
         ) : (
           <React.Fragment>
             <ul className="searchdropdown-dropdown-results">
-              {categories.map((category, idx) => {
-                return <SearchItem />;
+              {queryResults.map((item, idx) => {
+                return <SearchItem item={item} key={idx} />;
               })}
             </ul>
           </React.Fragment>
