@@ -1,0 +1,22 @@
+.storesection-content {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.storesection-sectiontitle {
+  padding: 0px 24px 16px 24px;
+  margin: 0px;
+
+  font-size: 24px;
+  font-weight: 700;
+  text-align: start;
+}
+
+.storesection-items-content {
+  display: flex;
+  gap: 8px;
+
+  padding: 0px 8px;
+
+  overflow-x: scroll;
+}
