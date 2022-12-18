@@ -211,7 +211,6 @@ const isItem = (item: any): item is Item => {
 };
 
 const isItems = (items: [any]): items is [Item] => {
-  console.log("ITEMS TO CAST", items);
   const areItems = items.reduce((acc, curr) => {
     if (isItem(curr)) {
       return acc * 1;
@@ -219,8 +218,6 @@ const isItems = (items: [any]): items is [Item] => {
       return acc * 0;
     }
   }, 1);
-
-  console.log("ARE ITEMS", areItems);
 
   return areItems === 1;
 };
@@ -234,6 +231,35 @@ export const searchItems = async (
     const response = await axios.get(
       `items/search?k=${query}&search_id=${searchId}`
     );
+
+    if (response.data && isItems(response.data)) {
+      return {
+        items: response.data,
+        status: response.status,
+      };
+    } else {
+      return {
+        items: undefined,
+        status: 400,
+      };
+    }
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    return {
+      items: undefined,
+      status: axiosError.response?.status,
+    };
+  }
+};
+
+export const fetchCategoryItems = async (
+  category: string
+): Promise<SearchItemsResult> => {
+  const searchId = uuidv4();
+
+  try {
+    const response = await axios.get(`items/category?c=${category}`);
 
     if (response.data && isItems(response.data)) {
       return {

@@ -1,18 +1,21 @@
-.header {
-  position: relative;
-  background-color: white;
-  padding: 8px;
+.compressheader {
+  position: fixed;
+  top: 0px;
+  left: 0px;
   width: 100%;
+
+  padding: 8px;
+
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 60px auto 64px 60px;
-  grid-template-rows: 44px 44px;
-  grid-template-areas:
-    "drawerbutton gastromialogo authbutton cartbutton"
-    "searchbutton searchbutton searchbutton searchbutton";
+  grid-template-columns: 40px auto 60px;
+  grid-template-rows: 44px;
+  grid-template-areas: "drawerbutton searchbutton cartbutton";
+
+  background-color: white;
 }
 
-.header-menubtn {
+.compressheader-menubtn {
   position: relative;
   top: calc(50% - 16px);
   height: 32px;
@@ -24,43 +27,7 @@
   cursor: pointer;
 }
 
-.header-logobtn {
-  height: 24px;
-  width: 114px;
-
-  align-self: center;
-  padding: 0px;
-
-  background-color: transparent;
-  border: none;
-
-  grid-area: gastromialogo;
-
-  cursor: pointer;
-}
-
-.header-authbtn {
-  position: relative;
-  top: calc(50% - 16px);
-  height: 32px;
-  width: calc(100%-4px);
-  margin-right: 4px;
-
-  border: none;
-  border-radius: 16px;
-  background-color: #ff0063;
-
-  grid-area: authbutton;
-  cursor: pointer;
-}
-
-.header-authbtn-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: white;
-}
-
-.header-cartbtn {
+.compressheader-cartbtn {
   position: relative;
   top: calc(50% - 16px);
   height: 32px;
@@ -78,7 +45,7 @@
   overflow: hidden;
 }
 
-.header-cartbtn-count {
+.compressheader-cartbtn-count {
   flex-grow: 1;
 
   font-size: 15px;
@@ -87,11 +54,12 @@
   padding: 0px 4px;
 }
 
-.header-searchbtn {
+.compressheader-searchbtn {
   position: relative;
-  top: 4px;
+  top: calc(50% - 20px);
+  margin-right: 8px;
   height: 40px;
-  width: 100%;
+  width: calc(100% - 8px);
   display: flex;
   align-items: center;
 
@@ -107,7 +75,7 @@
   overflow: hidden;
 }
 
-.header-searchbtn-title {
+.compressheader-searchbtn-title {
   flex-grow: 1;
   text-align: start;
 

@@ -103,3 +103,18 @@
 
   list-style: none;
 }
+
+.searchdropdown-noresults-content {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchdropdown-noresults-message {
+  margin-top: 4px;
+
+  font-size: 20;
+  font-weight: 800;
+}

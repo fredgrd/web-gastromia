@@ -1,0 +1,14 @@
+.store-content {
+  padding-top: 16px;
+}
+
+.store-banner-content {
+  padding: 0px 16px 24px 16px;
+}
+
+.store-banner {
+  width: 100%;
+  aspect-ratio: 2;
+
+  background-color: wheat;
+}

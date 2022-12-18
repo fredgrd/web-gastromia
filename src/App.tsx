@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "./features/auth/authSlice";
 import "./App.css";
@@ -6,11 +7,11 @@ import "./App.css";
 import { getUser } from "./app/services/gastromiaApi";
 
 import Header from "./features/header/header";
-import AuthModal from "./features/auth/authModal/authModal";
+import CompressHeader from "./features/header/compressHeader";
+import Store from "./features/store/store";
 
 function App() {
   const dispatch = useDispatch();
-  const [authModal, setAuthModal] = useState<boolean>(true);
 
   const getUserOnLoad = useCallback(async () => {
     const result = await getUser();
@@ -21,15 +22,28 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("I have fired once");
-
     getUserOnLoad();
   }, [getUserOnLoad]);
 
   return (
     <div className="App">
+      <CompressHeader />
       <Header />
-      {/* <AuthModal isOpen={authModal} onClose={() => setAuthModal(false)} /> */}
+      <Routes>
+        <Route path="/" element={<Store />} />
+        <Route
+          path="/items/:id"
+          element={
+            <div style={{ backgroundColor: "red", height: "200px" }}></div>
+          }
+        />
+      </Routes>
+      <button
+        style={{ height: "60px", width: "60px" }}
+        onClick={() => {
+          window.history.pushState(null, "Item", "/items/aja");
+        }}
+      ></button>
     </div>
   );
 }

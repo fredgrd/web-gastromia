@@ -3,6 +3,7 @@ import { Item, searchItems } from "../../app/services/gastromiaApi";
 import "./searchDropdown.css";
 
 import { ReactComponent as SearchIcon } from "../../assets/search@20px.svg";
+import { ReactComponent as EmptyIcon } from "../../assets/empty-search@120px.svg";
 import SearchItem from "./searchItem";
 
 const categories = [
@@ -62,6 +63,7 @@ enum DropdownType {
 
 const SearchDropdown: React.FC = () => {
   const [query, setQuery] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [queryResults, setQueryResults] = useState<Item[]>([]);
   const [showSearchButton, setShowSearchButton] = useState<boolean>(true);
   const [dropdown, setDropdown] = useState<DropdownType>(DropdownType.Populars);
@@ -75,7 +77,6 @@ const SearchDropdown: React.FC = () => {
   // Handle search events
   useEffect(() => {
     const search = async () => {
-      console.log(query);
       const result = await searchItems(query);
 
       if (result.items && result.items.length) {
@@ -83,6 +84,8 @@ const SearchDropdown: React.FC = () => {
       } else {
         setQueryResults([]);
       }
+
+      setIsLoading(false);
     };
 
     search();
@@ -90,6 +93,7 @@ const SearchDropdown: React.FC = () => {
 
   const searchOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length) {
+      setIsLoading(true);
       setShowSearchButton(false);
       setDropdown(DropdownType.Results);
     } else {
@@ -167,6 +171,15 @@ const SearchDropdown: React.FC = () => {
               {queryResults.map((item, idx) => {
                 return <SearchItem item={item} key={idx} />;
               })}
+              {queryResults.length === 0 && query.length > 1 && !isLoading ? (
+                <div className="searchdropdown-noresults-content">
+                  <EmptyIcon />
+                  <span className="searchdropdown-noresults-message">
+                    Non ci sono risultati per
+                  </span>
+                  <span className="searchdropdown-noresults-message">{`"${query}"`}</span>
+                </div>
+              ) : null}
             </ul>
           </React.Fragment>
         )}
