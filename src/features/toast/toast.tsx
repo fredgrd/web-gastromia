@@ -11,9 +11,9 @@ export interface ToastState {
 
 const Toast: React.FC<{
   message: string;
-  duration: number;
+  duration?: number;
   onDone: () => void;
-}> = ({ message, duration, onDone }) => {
+}> = ({ message, duration = 3000, onDone }) => {
   // Timer for 3seconds
 
   const cachedOnDone = useCallback(onDone, [onDone]);

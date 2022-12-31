@@ -1,5 +1,5 @@
 import React from "react";
-import { Item } from "../../app/services/gastromiaApi";
+import { Item } from "../../models/item";
 import "./searchItem.css";
 
 const SearchItem: React.FC<{ item: Item }> = ({ item }) => {

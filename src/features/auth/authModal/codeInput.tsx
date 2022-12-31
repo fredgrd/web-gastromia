@@ -8,7 +8,7 @@ import {
 
 import { ReactComponent as ArrowLeft } from "../../../assets/arrow-left@20px.svg";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../authSlice";
+import { setCredentials } from "../../../app/storeSlices/authSlice";
 
 const CodeInput: React.FC<{
   number: string;

@@ -1,12 +1,24 @@
 .itemcard-content {
-  height: 280px;
+  position: relative;
+  height: 235px;
   width: 140px;
+  flex-shrink: 0;
+
+  text-decoration: none;
+}
+
+.itemcard-content-notavailable {
+  filter: grayscale(100%);
 }
 
 .itemcard-image-content {
   position: relative;
-  width: 100%;
-  height: 210px;
+  width: 140px;
+  height: 140px;
+}
+
+.itemcard-image-content-notavailable {
+  opacity: 80%;
 }
 
 .itemcard-image {
@@ -17,14 +29,77 @@
   border-radius: 7px;
 }
 
+.itemcard-image-discounttag {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+
+  padding: 1px 3px;
+
+  font-size: 12px;
+  font-weight: 700;
+  color: #2b78c6;
+
+  border-radius: 3px;
+  background-color: #f2f8ff;
+}
+
+.itemcard-price-content {
+  display: flex;
+
+  margin-top: 6px;
+  padding: 0px 2px;
+
+  overflow: hidden;
+}
+
+.itemcard-pricetag {
+  position: relative;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.pricetag-discount {
+  padding: 0px 3px;
+  border-radius: 3px;
+  background-color: #f9dd52;
+}
+
+.itemcard-pricetag-whole {
+  margin-right: 2px;
+}
+
+.itemcard-pricetag-fractional {
+  display: inline-block;
+
+  margin-top: 2px;
+
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.itemcard-pricetag-originalprice-content {
+  display: flex;
+  align-items: flex-end;
+
+  margin-left: 4px;
+}
+
+.itemcard-pricetag-originalprice {
+  font-size: 15px;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
 .itemcard-name {
   display: block;
   width: 100%;
-  max-height: 56px;
+  max-height: 37px;
 
-  padding: 8px 4px;
+  margin-top: 4px;
+  padding: 0px 2px;
 
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   text-align: start;
   text-overflow: ellipsis;
@@ -35,7 +110,8 @@
 .itemcard-tags-content {
   display: flex;
 
-  padding: 0px 4px;
+  margin-top: 8px;
+  padding: 0px 2px;
 }
 
 .itemcard-tags {
@@ -43,10 +119,32 @@
 
   font-size: 12px;
   font-weight: 500;
-  color: #4491e7;
+  color: #00b172;
   text-overflow: ellipsis;
 
   overflow: hidden;
 
   white-space: nowrap;
+}
+
+.itemcard-notavailable-tag-content {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px ;
+  background-color: #343538;
+}
+
+.itemcard-notavailable-tag {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
 }

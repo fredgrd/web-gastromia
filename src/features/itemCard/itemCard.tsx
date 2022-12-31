@@ -1,24 +1,77 @@
 import React from "react";
-import { Item } from "../../app/services/gastromiaApi";
+import { Link } from "react-router-dom";
+import { Item } from "../../models/item";
 import capitalizeWord from "../../utils/capitalizeWord";
+import formatPrice from "../../utils/formatPrice";
 import "./itemCard.css";
 
 import { ReactComponent as TagsIcon } from "../../assets/tags@14px.svg";
+import PickerButton from "./pickerButton";
 
 const ItemCard: React.FC<{ item: Item }> = ({ item }) => {
   return (
     <div className="itemcard-content">
-      <div className="itemcard-image-content">
-        <img className="itemcard-image" src={item.media_url} />
-      </div>
-      <span className="itemcard-name">{item.name}</span>
+      <Link
+        className={!item.available ? "itemcard-content-notavailable" : ""}
+        to={`items/${item._id}`}
+      >
+        <div
+          className={`itemcard-image-content ${
+            !item.available ? "itemcard-image-content-notavailable" : ""
+          }`}
+        >
+          <img className="itemcard-image" src={item.media_url} />
+          {item.discount ? (
+            <div className="itemcard-image-discounttag">
+              <span>{item.discount_label}</span>
+            </div>
+          ) : null}
+        </div>
+        <div className="itemcard-price-content">
+          <div
+            className={`itemcard-pricetag ${
+              item.discount ? "pricetag-discount" : ""
+            }`}
+          >
+            <span>€</span>
+            <span className="itemcard-pricetag-whole">
+              {item.discount
+                ? formatPrice(item.discount_price).whole
+                : formatPrice(item.price).whole}
+            </span>
+            <span className="itemcard-pricetag-fractional">
+              {item.discount
+                ? formatPrice(item.discount_price).fractional
+                : formatPrice(item.price).fractional}
+            </span>
+          </div>
+          {item.discount ? (
+            <div className="itemcard-pricetag-originalprice-content">
+              <span className="itemcard-pricetag-originalprice">
+                €{(item.price / 1000).toFixed(2)}
+              </span>
+            </div>
+          ) : null}
+        </div>
+        <span className="itemcard-name">{item.name}</span>
 
-      <div className="itemcard-tags-content">
-        <TagsIcon style={{ flexShrink: "0" }} />
-        <span className="itemcard-tags">
-          {item.tags.map((tag) => capitalizeWord(tag)).join(", ")}
-        </span>
-      </div>
+        <div className="itemcard-tags-content">
+          <TagsIcon style={{ flexShrink: "0" }} fill="#00B172" />
+          <span className="itemcard-tags">
+            {item.tags.map((tag) => capitalizeWord(tag)).join(", ")}
+          </span>
+        </div>
+      </Link>
+
+      {!item.additions.length && item.available ? (
+        <PickerButton itemId={item._id} />
+      ) : null}
+
+      {!item.available ? (
+        <div className="itemcard-notavailable-tag-content">
+          <span className="itemcard-notavailable-tag">Non disponibile</span>
+        </div>
+      ) : null}
     </div>
   );
 };

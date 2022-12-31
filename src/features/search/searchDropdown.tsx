@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Item, searchItems } from "../../app/services/gastromiaApi";
+import { Item } from "../../models/item";
+import { searchItems } from "../../app/services/gastromiaApi";
 import "./searchDropdown.css";
 
 import { ReactComponent as SearchIcon } from "../../assets/search@20px.svg";

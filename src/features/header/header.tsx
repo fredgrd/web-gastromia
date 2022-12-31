@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../app/storeSlices/authSlice";
+import { selectCartCount } from "../../app/storeSlices/cartSlice";
 import MenuDrawer from "./menuDrawer";
 import "./header.css";
 
@@ -10,11 +14,15 @@ import AuthModal from "../auth/authModal/authModal";
 import CartDrawer from "./cartDrawer";
 import SearchModal from "../search/searchModal";
 
+
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [showAuth, setShowAuth] = useState<boolean>(false);
   const [showCart, setShowCart] = useState<boolean>(false);
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  const user = useSelector(selectCurrentUser);
+  const cartCount = useSelector(selectCartCount);
+  const navigate = useNavigate()
 
   return (
     <div className="header">
@@ -29,18 +37,20 @@ const Header = () => {
         }}
       />
 
-      <button className="header-logobtn">
+      <button className="header-logobtn" onClick={() => navigate("/")}>
         <GastromiaLogo />
       </button>
 
-      <button className="header-authbtn" onClick={() => setShowAuth(true)}>
-        <span className="header-authbtn-title">Log in</span>
-      </button>
+      {user === null ? (
+        <button className="header-authbtn" onClick={() => setShowAuth(true)}>
+          <span className="header-authbtn-title">Log in</span>
+        </button>
+      ) : null}
       <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
 
       <button className="header-cartbtn" onClick={() => setShowCart(true)}>
         <CartIcon fill="#343538" />
-        <span className="header-cartbtn-count">0</span>
+        <span className="header-cartbtn-count">{cartCount}</span>
       </button>
       <CartDrawer isOpen={showCart} onClose={() => setShowCart(false)} />
 

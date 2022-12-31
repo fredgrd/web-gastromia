@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../authSlice";
+import { setCredentials } from "../../../app/storeSlices/authSlice";
 import { createUser } from "../../../app/services/gastromiaApi";
 import Toast, { ToastState } from "../../toast/toast";
 

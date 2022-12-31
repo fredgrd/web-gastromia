@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useApiGet } from "./useApi";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../features/auth/authSlice";
+import { setCredentials } from "../storeSlices/authSlice";
 import { v4 as uuidv4 } from "uuid";
+
+import { Item } from "../../models/item";
 
 export interface User {
   id: string;
@@ -21,7 +23,7 @@ const isUser = (user: any): user is User => {
 };
 
 export const useGetUser = () => {
-  const [trigger, { data, error, isLoading }] = useApiGet("user/fetch", {
+  const [trigger, { data, error, isLoading }] = useApiGet("/user/fetch", {
     withCredentials: true,
   });
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ export interface GetUserResult {
 
 export const getUser = async (): Promise<GetUserResult> => {
   try {
-    const response = await axios.get("user/fetch", { withCredentials: true });
+    const response = await axios.get("/user/fetch", { withCredentials: true });
 
     if (response.data && isUser(response.data)) {
       return {
@@ -87,7 +89,7 @@ export const startVerification = async (
   number: string
 ): Promise<StartVerificationResult> => {
   try {
-    const response = await axios.post("auth/start", { number });
+    const response = await axios.post("/auth/start", { number });
     return {
       success: true,
       status: response.status,
@@ -111,7 +113,7 @@ export const checkVerification = async (
   code: string
 ): Promise<CheckVerificationResult> => {
   try {
-    const response = await axios.post("auth/checkcode", { number, code });
+    const response = await axios.post("/auth/checkcode", { number, code });
 
     if (response.data && isUser(response.data)) {
       return {
@@ -170,22 +172,6 @@ export const createUser = async (name: string): Promise<CreateUserResult> => {
 // -----------------------------------------------------------------------
 // ITEM API
 
-export interface Item {
-  id: string;
-  name: string;
-  description: string;
-  available: boolean;
-  price: number;
-  discount: boolean;
-  discount_price: number;
-  discount_label: string;
-  additions: [];
-  tags: [string];
-  category: string;
-  media_url: string;
-  preview_url: string;
-}
-
 export interface SearchItemsResult {
   items: [Item] | undefined;
   status: number | undefined;
@@ -194,7 +180,7 @@ export interface SearchItemsResult {
 const isItem = (item: any): item is Item => {
   const weakCast = item as Item;
   return (
-    weakCast.id !== undefined &&
+    weakCast._id !== undefined &&
     weakCast.name !== undefined &&
     weakCast.description !== undefined &&
     weakCast.available !== undefined &&
@@ -229,7 +215,7 @@ export const searchItems = async (
 
   try {
     const response = await axios.get(
-      `items/search?k=${query}&search_id=${searchId}`
+      `/items/search?k=${query}&search_id=${searchId}`
     );
 
     if (response.data && isItems(response.data)) {
@@ -253,13 +239,18 @@ export const searchItems = async (
   }
 };
 
+export interface FetchCategoryItemsResult {
+  items: [Item] | undefined;
+  status: number | undefined;
+}
+
 export const fetchCategoryItems = async (
   category: string
-): Promise<SearchItemsResult> => {
+): Promise<FetchCategoryItemsResult> => {
   const searchId = uuidv4();
 
   try {
-    const response = await axios.get(`items/category?c=${category}`);
+    const response = await axios.get(`/items/category?c=${category}`);
 
     if (response.data && isItems(response.data)) {
       return {
@@ -280,4 +271,58 @@ export const fetchCategoryItems = async (
       status: axiosError.response?.status,
     };
   }
+};
+
+export interface FetchItemResult {
+  item: Item | undefined;
+  status: number | undefined;
+}
+
+export const fetchItem = async (itemId: string): Promise<FetchItemResult> => {
+  try {
+    const response = await axios.get(`/items/item?i=${itemId}`);
+
+    if (response.data && isItem(response.data)) {
+      return {
+        item: response.data,
+        status: response.status,
+      };
+    } else {
+      return {
+        item: undefined,
+        status: 400,
+      };
+    }
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    return {
+      item: undefined,
+      status: axiosError.response?.status,
+    };
+  }
+};
+
+export const useGetItem = (id: string): Item | null | undefined => {
+  const [item, setItem] = useState<Item | null | undefined>();
+
+  useEffect(() => {
+    const fetchItem = async (id: string) => {
+      try {
+        const response = await axios.get(`/items/item?i=${id}`);
+
+        if (response.data && isItem(response.data)) {
+          setItem(response.data);
+        } else {
+          setItem(null);
+        }
+      } catch (error) {
+        setItem(null);
+      }
+    };
+
+    fetchItem(id);
+  }, [id]);
+
+  return item;
 };
