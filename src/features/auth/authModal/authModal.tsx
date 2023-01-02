@@ -37,6 +37,7 @@ const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     if (authModalState === AuthModalState.Hidden) {
       timeout = setTimeout(() => {
         setAuthModalState(AuthModalState.Visible);
+        setAuthStep(AuthStep.Number);
         onClose();
       }, 200);
     }

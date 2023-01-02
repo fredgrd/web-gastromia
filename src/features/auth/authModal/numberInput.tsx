@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Toast, { ToastState } from "../../toast/toast";
 import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
-import { startVerification } from "../../../app/services/gastromiaApi";
+import { startVerification } from "../../../app/services/authApi";
 
 import { ReactComponent as Close } from "../../../assets/close@20px.svg";
 

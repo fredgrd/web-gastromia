@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Toast, { ToastState } from "../../toast/toast";
 import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
-import {
-  startVerification,
-  checkVerification,
-} from "../../../app/services/gastromiaApi";
 
 import { ReactComponent as ArrowLeft } from "../../../assets/arrow-left@20px.svg";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../../app/storeSlices/authSlice";
+import {
+  startVerification,
+  completeVerification,
+} from "../../../app/services/authApi";
 
 const CodeInput: React.FC<{
   number: string;
@@ -42,6 +42,7 @@ const CodeInput: React.FC<{
     }
   };
 
+  // Retry sending the verification OTP
   const retryVerification = async () => {
     if (resendButtonState.show) {
       // The resend button was visible + clicked
@@ -75,17 +76,17 @@ const CodeInput: React.FC<{
     }
   };
 
+  // Try complete the verification
   const onClick = async () => {
     setIsLoading(true);
-    const result = await checkVerification(number, code);
+    const result = await completeVerification(number, code);
 
     if (result.user) {
       console.log("USER", result.user);
       dispatch(setCredentials({ user: result.user }));
       onDone();
     } else if (result.status === 200) {
-      // Proceed to input name
-      console.log("Status 200");
+      console.log("Verification Completed - NewUser");
       onNext();
     } else if (result.status === 400) {
       setToastState({

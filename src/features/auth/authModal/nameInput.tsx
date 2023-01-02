@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../../app/storeSlices/authSlice";
-import { createUser } from "../../../app/services/gastromiaApi";
+import { createUser } from "../../../app/services/userApi";
 import Toast, { ToastState } from "../../toast/toast";
 
 import { ReactComponent as Close } from "../../../assets/close@20px.svg";
@@ -26,17 +26,12 @@ const NameInput: React.FC<{ onDone: () => void }> = ({ onDone }) => {
   const onClick = async () => {
     setIsLoading(true);
 
-    const result = await createUser(name);
+    const user = await createUser(name);
 
-    if (result.user) {
+    if (user) {
       // User was created
-      dispatch(setCredentials({ user: result.user }));
+      dispatch(setCredentials({ user: user }));
       onDone();
-    } else if (result.status === 400) {
-      setToastState({
-        show: true,
-        message: "Operazione fallita. Riprova a registrarti",
-      });
     } else {
       setToastState({
         show: true,
