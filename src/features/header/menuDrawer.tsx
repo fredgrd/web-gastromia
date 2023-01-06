@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setAuthModalState,
@@ -51,12 +51,26 @@ const MenuDrawer: React.FC<{
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [firstLocation, setFirstLocation] = useState<string>("/");
 
   useClickOutside(drawerRef, onClose);
 
   useEffect(() => {
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setFirstLocation(location.pathname);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (firstLocation !== location.pathname) {
+      onClose();
+    }
+  }, [location]);
 
   useEffect(() => {
     if (isOpen) {

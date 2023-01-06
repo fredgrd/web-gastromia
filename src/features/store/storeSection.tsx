@@ -3,7 +3,7 @@ import { Item } from "../../models/item";
 import { fetchCategory } from "../../app/services/item-api";
 import "./storeSection.css";
 
-import ItemCard from "../itemCard/itemCard";
+import ItemCard from "../item-card/item-card";
 import Skeleton from "../skeleton/skeleton";
 
 const SectionSkeleton = () => {

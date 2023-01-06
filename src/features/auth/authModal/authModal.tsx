@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectAuthModalState,
@@ -21,8 +22,21 @@ const AuthModal: React.FC = () => {
   const isOpen = useSelector(selectAuthModalState);
   const [authStep, setAuthStep] = useState<AuthStep>(AuthStep.Number);
   const [number, setNumber] = useState<string>("");
-
   const dispatch = useDispatch();
+  const location = useLocation();
+  const [firstLocation, setFirstLocation] = useState<string>("/");
+
+  useEffect(() => {
+    if (isOpen) {
+      setFirstLocation(location.pathname);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (firstLocation !== location.pathname) {
+      onClose();
+    }
+  }, [location]);
 
   useEffect(() => {
     if (isOpen) {

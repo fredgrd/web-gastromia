@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import useClickOutside from "../../utils/useClickOutside";
 import ReactPortal from "../reactPortal/reactPortal";
 import "./cartDrawer.css";
@@ -16,6 +17,20 @@ const CartDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     DrawerState.Visible
   );
   const drawerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const [firstLocation, setFirstLocation] = useState<string>("/");
+
+  useEffect(() => {
+    if (isOpen) {
+      setFirstLocation(location.pathname);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (firstLocation !== location.pathname) {
+      onClose();
+    }
+  }, [location]);
 
   useClickOutside(drawerRef, () => setDrawerState(DrawerState.Hidden));
 
