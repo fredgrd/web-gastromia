@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../app/storeSlices/authSlice";
-import { selectCartCount } from "../../app/storeSlices/cartSlice";
+import { selectCurrentUser } from "../../app/store-slices/auth-slice";
+import { selectCartCount } from "../../app/store-slices/cart-slice";
 import MenuDrawer from "./menuDrawer";
 import "./header.css";
 
@@ -12,8 +12,7 @@ import { ReactComponent as CartIcon } from "../../assets/cart@24px.svg";
 import { ReactComponent as SearchIcon } from "../../assets/search@20px.svg";
 import AuthModal from "../auth/authModal/authModal";
 import CartDrawer from "./cartDrawer";
-import SearchModal from "../search/searchModal";
-
+import SearchModal from "../search/search-modal";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -22,7 +21,8 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const user = useSelector(selectCurrentUser);
   const cartCount = useSelector(selectCartCount);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className="header">
@@ -32,7 +32,6 @@ const Header = () => {
       <MenuDrawer
         isOpen={showMenu}
         onClose={() => {
-          console.log("DRAWER HIDE");
           setShowMenu(false);
         }}
       />
@@ -46,11 +45,23 @@ const Header = () => {
           <span className="header-authbtn-title">Log in</span>
         </button>
       ) : null}
-      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
 
-      <button className="header-cartbtn" onClick={() => setShowCart(true)}>
-        <CartIcon fill="#343538" />
-        <span className="header-cartbtn-count">{cartCount}</span>
+      <button
+        className="header-cartbtn"
+        onClick={() => setShowCart(true)}
+        style={{
+          backgroundColor: location.pathname === "/" ? "#f6f7f8" : "#00ad0a",
+        }}
+      >
+        <CartIcon fill={location.pathname === "/" ? "#343538" : "white"} />
+        <span
+          className="header-cartbtn-count"
+          style={{
+            color: location.pathname === "/" ? "#343538" : "white",
+          }}
+        >
+          {cartCount}
+        </span>
       </button>
       <CartDrawer isOpen={showCart} onClose={() => setShowCart(false)} />
 

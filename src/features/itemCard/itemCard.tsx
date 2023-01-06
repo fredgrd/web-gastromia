@@ -63,9 +63,7 @@ const ItemCard: React.FC<{ item: Item }> = ({ item }) => {
         </div>
       </Link>
 
-      {!item.additions.length && item.available ? (
-        <PickerButton itemId={item._id} />
-      ) : null}
+      {item.quick_add && item.available ? <PickerButton item={item} /> : null}
 
       {!item.available ? (
         <div className="itemcard-notavailable-tag-content">

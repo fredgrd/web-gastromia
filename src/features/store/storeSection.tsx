@@ -1,33 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Item } from "../../models/item";
-import { fetchCategoryItems } from "../../app/services/gastromiaApi";
+import { fetchCategory } from "../../app/services/item-api";
 import "./storeSection.css";
 
 import ItemCard from "../itemCard/itemCard";
+import Skeleton from "../skeleton/skeleton";
+
+const SectionSkeleton = () => {
+  return (
+    <div className="storesectionskeleton-content">
+      <Skeleton className="storesectionskeleton-header" />
+      <div className="storesectionskeleton-itemcards-content">
+        {[1, 2, 3].map((_, idx) => {
+          return (
+            <div className="storesectionskeleton-itemcard-content" key={idx}>
+              <Skeleton className="storesectionskeleton-itemcard-img" />
+              <Skeleton className="storesectionskeleton-itemcard-header1" />
+              <Skeleton className="storesectionskeleton-itemcard-header2" />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 const StoreSection: React.FC<{ title: string; category: string }> = ({
   title,
   category,
 }) => {
   const [items, setItems] = useState<Item[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetch = async () => {
-      const result = await fetchCategoryItems(category);
+      const items = await fetchCategory(category);
 
-      console.log("RESULT", result.items)
-
-      if (result.items && result.items.length) {
-        setItems(result.items);
+      if (items) {
+        setItems(items);
+        setIsLoading(false);
       } else {
         setItems([]);
       }
-
-      //   setIsLoading(false);
     };
 
     fetch();
   }, []);
+
+  if (isLoading) {
+    return <SectionSkeleton />;
+  }
 
   return (
     <div className="storesection-content">

@@ -15,17 +15,6 @@
   animation-duration: 0.4s;
 }
 
-@keyframes toast-entrance {
-  from {
-    top: -40px;
-    opacity: 0;
-  }
-  to {
-    top: 10px;
-    opacity: 1;
-  }
-}
-
 .toast-icon {
   height: 24px;
   width: 24px;

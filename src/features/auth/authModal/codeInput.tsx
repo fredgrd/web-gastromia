@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import Toast, { ToastState } from "../../toast/toast";
-import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
-
-import { ReactComponent as ArrowLeft } from "../../../assets/arrow-left@20px.svg";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../../app/storeSlices/authSlice";
+import { setToastState } from "../../../app/store-slices/app-slice";
+import { setCredentials } from "../../../app/store-slices/auth-slice";
 import {
   startVerification,
   completeVerification,
-} from "../../../app/services/authApi";
+} from "../../../app/services/auth-api";
+import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
+
+import { ReactComponent as ArrowLeft } from "../../../assets/arrow-left@20px.svg";
 
 const CodeInput: React.FC<{
   number: string;
@@ -17,16 +17,21 @@ const CodeInput: React.FC<{
   onNext: () => void;
 }> = ({ number, onDone, onClose, onNext }) => {
   const [code, setCode] = useState<string>("");
-  const [toastState, setToastState] = useState<ToastState>({
-    show: false,
-    message: "",
-  });
   const [resendButtonState, setResendButtonState] = useState<{
     show: boolean;
     countdown: number;
   }>({ show: true, countdown: 20 });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
+
+  const showToast = (message: string) => {
+    dispatch(
+      setToastState({
+        isOpen: true,
+        message: message,
+      })
+    );
+  };
 
   // Declare timeout, and setup cleanup funcion
   const interval = useRef<NodeJS.Timer | undefined>();
@@ -59,20 +64,11 @@ const CodeInput: React.FC<{
     const result = await startVerification(number);
 
     if (result.success) {
-      setToastState({
-        show: true,
-        message: `Codice inviato al ${number}`,
-      });
+      showToast(`Codice inviato al ${number}`);
     } else if (result.status === 400) {
-      setToastState({
-        show: true,
-        message: "Operazione fallita. Controlla il numero e riprova",
-      });
+      showToast("Operazione fallita. Controlla il numero e riprova");
     } else {
-      setToastState({
-        show: true,
-        message: "Ops.. qualcosa è andato storto",
-      });
+      showToast("Ops.. qualcosa è andato storto");
     }
   };
 
@@ -89,15 +85,9 @@ const CodeInput: React.FC<{
       console.log("Verification Completed - NewUser");
       onNext();
     } else if (result.status === 400) {
-      setToastState({
-        show: true,
-        message: "Operazione fallita. Controlla il codice e riprova",
-      });
+      showToast("Operazione fallita. Controlla il numero e riprova");
     } else {
-      setToastState({
-        show: true,
-        message: "Ops.. qualcosa è andato storto",
-      });
+      showToast("Ops.. qualcosa è andato storto");
     }
 
     setIsLoading(false);
@@ -152,16 +142,6 @@ const CodeInput: React.FC<{
           />
         )}
       </div>
-
-      {toastState.show && (
-        <Toast
-          message={toastState.message}
-          duration={3000}
-          onDone={() => {
-            setToastState({ show: false, message: "" });
-          }}
-        />
-      )}
     </React.Fragment>
   );
 };

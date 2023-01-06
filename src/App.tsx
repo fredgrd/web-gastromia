@@ -1,55 +1,26 @@
-import React, { useEffect, useCallback } from "react";
-import { v4 as uuid4 } from "uuid";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "./app/storeSlices/authSlice";
+import { AppDispatch } from "./app/store";
+import { fetchRemoteUser } from "./app/store-slices/auth-slice";
+import { fetchRemoteSnapshot } from "./app/store-slices/cart-slice";
 import "./App.css";
-
-import { fetchUser } from "./app/services/userApi";
 
 import Header from "./features/header/header";
 import CompressHeader from "./features/header/compressHeader";
 import Store from "./features/store/store";
-import ItemPage from "./features/itemPage/itemPage";
-import { fetchCartSnapshot } from "./app/services/cartApi";
-import { update } from "./app/storeSlices/cartSlice";
+import ItemPage from "./features/item-page/item-page";
 import ExcludedItemsModal from "./features/cart/excludedItemsModal";
+import AuthModal from "./features/auth/authModal/authModal";
+import Toast from "./features/toast/toast";
 
 function App() {
-  const dispatch = useDispatch();
-
-  // Initial fetchings
-  const fetchUserOnLoad = useCallback(async () => {
-    const user = await fetchUser();
-
-    if (user) {
-      dispatch(setCredentials({ user: user }));
-    } else {
-      console.log("SETTING CREDENTIALS");
-      dispatch(setCredentials({ user: null }));
-    }
-  }, [dispatch]);
-
-  const fetchCartSnapshotOnLoad = useCallback(async () => {
-    const snapshot = await fetchCartSnapshot();
-
-    if (snapshot) {
-      console.log("SNAPSHOT", snapshot);
-      dispatch(
-        update({ included: snapshot.included, excluded: snapshot.excluded })
-      );
-    } else {
-      // SET EMPTY CART
-    }
-  }, [dispatch]);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    fetchUserOnLoad();
-  }, [fetchUserOnLoad]);
-
-  useEffect(() => {
-    fetchCartSnapshotOnLoad();
-  }, [fetchCartSnapshotOnLoad]);
+    dispatch(fetchRemoteUser());
+    dispatch(fetchRemoteSnapshot());
+  }, [dispatch]);
 
   return (
     <React.StrictMode>
@@ -61,6 +32,8 @@ function App() {
           <Route path="/items/:id" element={<ItemPage />} />
         </Routes>
         <ExcludedItemsModal />
+        <AuthModal />
+        <Toast />
       </div>
     </React.StrictMode>
   );

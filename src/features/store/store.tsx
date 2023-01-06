@@ -9,8 +9,9 @@ const Store: React.FC = () => {
       <div className="store-banner-content">
         <div className="store-banner"></div>
       </div>
-      <StoreSection title="Poké" category="mains>poké" />
-      <StoreSection title="Pita" category="mains>pita" />
+      <StoreSection title="Poké" category="poké" />
+      {/* <StoreSection title="Pita" category="mains>pita" /> */}
+      <StoreSection title="Drinks" category="drinks" />
     </div>
   );
 };
