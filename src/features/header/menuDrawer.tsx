@@ -150,9 +150,9 @@ const MenuDrawer: React.FC<{
                       onClick={onSignUpClick}
                       options={{
                         title: "Registrati",
-                        buttonColor: "#FF0063",
-                        showButton: true,
-                        showSpinner: false,
+                        isEnabled: true,
+                        isVisible: true,
+                        isLoading: false,
                       }}
                     />
 

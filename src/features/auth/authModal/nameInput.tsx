@@ -73,9 +73,9 @@ const NameInput: React.FC<{ onDone: () => void }> = ({ onDone }) => {
               onClick={onClick}
               options={{
                 title: "Completa",
-                buttonColor: undefined,
-                showButton: !isLoading,
-                showSpinner: isLoading,
+                isEnabled: true,
+                isVisible: true,
+                isLoading: isLoading,
               }}
             />
           </div>

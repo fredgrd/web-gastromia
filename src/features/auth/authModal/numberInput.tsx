@@ -96,9 +96,9 @@ const NumberInput: React.FC<{
           onClick={onClick}
           options={{
             title: "Continua",
-            buttonColor: undefined,
-            showButton: !isLoading,
-            showSpinner: isLoading,
+            isEnabled: true,
+            isVisible: true,
+            isLoading: isLoading,
           }}
         />
       </div>

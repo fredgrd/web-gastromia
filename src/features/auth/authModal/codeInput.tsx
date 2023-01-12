@@ -9,6 +9,8 @@ import {
 import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
 
 import { ReactComponent as ArrowLeft } from "../../../assets/arrow-left@20px.svg";
+import { fetchRemoteSnapshot } from "../../../app/store-slices/cart-slice";
+import { AppDispatch } from "../../../app/store";
 
 const CodeInput: React.FC<{
   number: string;
@@ -22,7 +24,7 @@ const CodeInput: React.FC<{
     countdown: number;
   }>({ show: true, countdown: 20 });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const showToast = (message: string) => {
     dispatch(
@@ -80,6 +82,7 @@ const CodeInput: React.FC<{
     if (result.user) {
       console.log("USER", result.user);
       dispatch(setCredentials({ user: result.user }));
+      dispatch(fetchRemoteSnapshot());
       onDone();
     } else if (result.status === 200) {
       console.log("Verification Completed - NewUser");
@@ -135,9 +138,9 @@ const CodeInput: React.FC<{
             onClick={onClick}
             options={{
               title: "Continua",
-              buttonColor: undefined,
-              showButton: !isLoading,
-              showSpinner: isLoading,
+              isEnabled: true,
+              isVisible: true,
+              isLoading: isLoading,
             }}
           />
         )}
