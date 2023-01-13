@@ -16,6 +16,7 @@ import AuthModal from "./features/auth/authModal/authModal";
 import Toast from "./features/toast/toast";
 import Checkout from "./features/checkout/checkout";
 import { Elements } from "@stripe/react-stripe-js";
+import OrdersPage from "./features/orders-page/orders-page";
 
 const stripePromise = loadStripe("pk_test_MVxV52uGwe6eYy4DjyPoJIkF005npSloTk");
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/" element={<Store />} />
             <Route path="/items/:id" element={<ItemPage />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<OrdersPage />} />
           </Routes>
           <ExcludedItemsModal />
           <AuthModal />

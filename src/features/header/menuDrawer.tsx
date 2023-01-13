@@ -198,18 +198,20 @@ const MenuDrawer: React.FC<{
                   <OrdersIcon fill="#343538" />
                 </DrawerButton>
 
-                <DrawerButton
-                  onClick={() => {
-                    onClose();
-                    navigate("/coffee+");
-                  }}
-                  options={{
-                    title: "Coffee +",
-                    style: { marginTop: "4px" },
-                  }}
-                >
-                  <CoffeeIcon fill="#343538" />
-                </DrawerButton>
+                {false && (
+                  <DrawerButton
+                    onClick={() => {
+                      onClose();
+                      navigate("/coffee+");
+                    }}
+                    options={{
+                      title: "Coffee +",
+                      style: { marginTop: "4px" },
+                    }}
+                  >
+                    <CoffeeIcon fill="#343538" />
+                  </DrawerButton>
+                )}
 
                 <hr className="menudrawer-break" />
 
