@@ -233,7 +233,7 @@ const MenuDrawer: React.FC<{
                 <DrawerButton
                   onClick={() => {
                     onClose();
-                    navigate("/settings/payments");
+                    navigate("/settings");
                   }}
                   options={{
                     title: "Metodi di pagamento",

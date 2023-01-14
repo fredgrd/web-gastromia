@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./app/store";
 import { fetchRemoteUser } from "./app/store-slices/auth-slice";
@@ -15,8 +16,9 @@ import ExcludedItemsModal from "./features/cart/excludedItemsModal";
 import AuthModal from "./features/auth/authModal/authModal";
 import Toast from "./features/toast/toast";
 import Checkout from "./features/checkout/checkout";
-import { Elements } from "@stripe/react-stripe-js";
 import OrdersPage from "./features/orders-page/orders-page";
+import SettingsPage from "./features/settings-page/settings-page";
+import NotFound from "./features/not-found/not-found";
 
 const stripePromise = loadStripe("pk_test_MVxV52uGwe6eYy4DjyPoJIkF005npSloTk");
 
@@ -44,6 +46,8 @@ function App() {
             <Route path="/items/:id" element={<ItemPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <ExcludedItemsModal />
           <AuthModal />
