@@ -14,7 +14,7 @@ import PrimaryButton from "../gastromiaKit/buttons/primaryButton";
 import ReactPortal from "../reactPortal/reactPortal";
 import "./menuDrawer.css";
 
-import UserAvatar from "../../assets/images/useravatar.webp";
+import UserAvatar from "../../assets/images/useravatar.png";
 import { ReactComponent as LoginIcon } from "../../assets/login@24px.svg";
 import { ReactComponent as HomeIcon } from "../../assets/home@24px.svg";
 import { ReactComponent as OrdersIcon } from "../../assets/orders@24px.svg";
