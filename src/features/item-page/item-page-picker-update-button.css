@@ -1,0 +1,88 @@
+.itempagepickerupdatebutton-content {
+  display: flex;
+}
+
+.itempagepickerupdatebutton-quantity-content {
+  height: 56px;
+  width: calc(50% - 8px);
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 12px;
+  background-color: #f6f7f8;
+}
+
+.itempagepickerupdatebutton-quantity-removebtn {
+  flex-shrink: 0;
+  height: 56px;
+  width: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid #f6f7f8;
+  border-radius: 12px;
+  background-color: #f6f7f8;
+}
+
+.itempagepickerupdatebutton-quantity-removebtn:active {
+  background-color: #dbdbdb;
+}
+
+.itempagepickerupdatebutton-quantity-count {
+  flex-grow: 1;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.itempagepickerupdatebutton-quantity-addbtn {
+  flex-shrink: 0;
+  height: 56px;
+  width: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid #f6f7f8;
+  border-radius: 12px;
+  background-color: #f6f7f8;
+}
+
+.itempagepickerupdatebutton-quantity-addbtn:active {
+  background-color: #dbdbdb;
+}
+
+.itempagepickerupdatebutton-cart-addbtn {
+  height: 56px;
+  width: calc(50% - 8px);
+
+  margin-left: 16px;
+
+  border: 4px solid #00ad0a;
+  border-radius: 12px;
+  background-color: #00ad0a;
+}
+
+.itempagepickerupdatebutton-cart-addbtn:active {
+  background-color: #026507;
+}
+
+.itempagepickerupdatebutton-cart-incartbtn {
+  height: 56px;
+  width: calc(50% - 8px);
+
+  margin-left: 16px;
+
+  border: 4px solid #f6f7f8;
+  border-radius: 12px;
+  background-color: #f6f7f8;
+}
+
+.itempagepickerupdatebutton-cart-addbtn-title {
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -1,0 +1,75 @@
+.itempage-guarantee-content {
+  margin-top: 24px;
+  padding: 0px 16px;
+}
+
+.itempage-guarantee-title-content {
+  display: flex;
+  align-items: center;
+}
+
+.itempage-guarantee-title {
+  margin: 0px 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.itempage-guarantee-info-content {
+  position: relative;
+  align-items: center;
+}
+
+.itempage-guarantee-info-btn {
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+}
+
+.itempage-guarantee-info-disclaimer-content {
+  position: absolute;
+  left: -117px;
+  width: 250px;
+
+  padding: 12px;
+
+  border-radius: 8px;
+  background-color: #1f5a96;
+}
+
+.itempage-guarantee-info-disclaimer-triangle {
+  position: absolute;
+  left: calc(50% - 10px);
+}
+
+.itempage-guarantee-info-disclaimer-title {
+  margin: 0px;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: start;
+  color: white;
+}
+
+.itempage-guarantee-info-disclaimer {
+  margin: 2px 6px 0px 0px;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: start;
+  color: white;
+}
+
+.itempage-guarantee-subtitle-content {
+  display: flex;
+}
+
+.itempage-guarantee-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: start;
+  color: #72767e;
+}

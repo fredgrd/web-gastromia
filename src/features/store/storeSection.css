@@ -1,3 +1,61 @@
+.storesectionskeleton-content {
+  display: flex;
+  flex-direction: column;
+  height: 244px;
+  width: 100%;
+
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.storesectionskeleton-header {
+  height: 28px;
+  width: 130px;
+
+  margin-left: 16px;
+
+  border-radius: 7px;
+}
+
+.storesectionskeleton-itemcards-content {
+  display: flex;
+  margin-top: 16px;
+}
+
+.storesectionskeleton-itemcard-content {
+  height: 196px;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 16px;
+}
+
+.storesectionskeleton-itemcard-img {
+  height: 140px;
+  width: 140px;
+
+  border-radius: 10px;
+}
+
+.storesectionskeleton-itemcard-header1 {
+  height: 18px;
+  width: 70px;
+
+  margin-top: 10px;
+
+  border-radius: 5px;
+}
+
+.storesectionskeleton-itemcard-header2 {
+  height: 18px;
+  width: 120px;
+
+  margin-top: 10px;
+
+  border-radius: 5px;
+}
+
 .storesection-content {
   width: 100%;
   margin-bottom: 24px;
@@ -19,4 +77,5 @@
   padding: 0px 8px;
 
   overflow-x: scroll;
+  overflow-y: hidden;
 }

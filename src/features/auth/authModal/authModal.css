@@ -1,4 +1,5 @@
 .auth-modal {
+  z-index: 1000;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -9,39 +10,8 @@
   background-color: rgba(0, 0, 0, 0.24);
 }
 
-.auth-modal-enter {
-  animation: auth-modal-enter-animation;
-  animation-duration: 0.2s;
-}
-
-.auth-modal-exit {
-  animation: auth-modal-exit-animation;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes auth-modal-enter-animation {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  to {
-    background-color: rgba(0, 0, 0, 0.24);
-  }
-}
-
-@keyframes auth-modal-exit-animation {
-  from {
-    background-color: rgba(0, 0, 0, 0.24);
-  }
-
-  to {
-    background-color: rgba(0, 0, 0, 0);
-  }
-}
-
 .auth-modal-content {
-  top: 20px;
+  top: 0px;
   position: relative;
   height: calc(100% - 20px);
   width: 100%;
@@ -50,39 +20,6 @@
   flex-direction: column;
   background-color: white;
   border-radius: 10px 10px 0px 0px;
-}
-
-.auth-modal-content-enter {
-  animation: auth-modal-content-enter-animation;
-  animation-duration: 0.2s;
-}
-
-.auth-modal-content-exit {
-  animation: auth-modal-content-exit-animation;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes auth-modal-content-enter-animation {
-  from {
-    top: 100%;
-    opacity: 0;
-  }
-  to {
-    top: 20px;
-    opacity: 1;
-  }
-}
-
-@keyframes auth-modal-content-exit-animation {
-  from {
-    top: 20px;
-    opacity: 1;
-  }
-  to {
-    top: 100%;
-    opacity: 0;
-  }
 }
 
 .auth-modal-header {

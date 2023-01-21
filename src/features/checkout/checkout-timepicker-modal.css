@@ -1,0 +1,88 @@
+.checkouttimepicker-modal {
+  z-index: 1000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+
+  padding: 60px 0px 24px 0px;
+
+  overflow-y: scroll;
+
+  background-color: white;
+}
+
+.checkouttimepicker-modal-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+}
+
+.checkouttimepicker-modal-heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0px;
+}
+
+.checkouttimepicker-modal-icon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50px;
+  left: 0px;
+}
+
+.checkouttimepicker-modal-interval-content {
+  display: flex;
+  align-items: center;
+
+  padding: 16px 24px;
+
+  cursor: pointer;
+}
+
+.checkouttimepicker-modal-interval {
+  margin-left: 16px;
+
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkouttimepicker-modal-free {
+  margin-left: auto;
+
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkouttimepicker-modal-closed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 32px;
+}
+
+.checkouttimepicker-modal-closed-heading1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.checkouttimepicker-modal-closed-heading2 {
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 400;
+}

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./authModal.css";
-
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAuthModalState,
+  setAuthModalState,
+} from "../../../app/store-slices/app-slice";
+import { AnimatePresence, motion } from "framer-motion";
 import ReactPortal from "../../reactPortal/reactPortal";
 import NumberInput from "./numberInput";
 import CodeInput from "./codeInput";
 import NameInput from "./nameInput";
-import Toast, { ToastState } from "../../toast/toast";
+import "./authModal.css";
 
 enum AuthStep {
   Number,
@@ -13,36 +18,25 @@ enum AuthStep {
   Name,
 }
 
-enum AuthModalState {
-  Visible,
-  Hidden,
-}
-
-const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
-  isOpen,
-  onClose,
-}) => {
-  const [authModalState, setAuthModalState] = useState<AuthModalState>(
-    AuthModalState.Visible
-  );
+const AuthModal: React.FC = () => {
+  const isOpen = useSelector(selectAuthModalState);
   const [authStep, setAuthStep] = useState<AuthStep>(AuthStep.Number);
   const [number, setNumber] = useState<string>("");
-  const [toastState, setToastState] = useState<ToastState>({
-    show: false,
-    message: "",
-  });
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [firstLocation, setFirstLocation] = useState<string>("/");
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined;
-    if (authModalState === AuthModalState.Hidden) {
-      timeout = setTimeout(() => {
-        setAuthModalState(AuthModalState.Visible);
-        onClose();
-      }, 200);
+    if (isOpen) {
+      setFirstLocation(location.pathname);
     }
+  }, [isOpen]);
 
-    return () => clearTimeout(timeout);
-  }, [authModalState]);
+  useEffect(() => {
+    if (firstLocation !== location.pathname) {
+      onClose();
+    }
+  }, [location]);
 
   useEffect(() => {
     if (isOpen) {
@@ -52,16 +46,16 @@ const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     }
   }, [isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
+  const onClose = () => {
+    dispatch(setAuthModalState({ isOpen: false }));
+  };
 
   const renderSwitch = (step: AuthStep) => {
     switch (step) {
       case AuthStep.Number:
         return (
           <NumberInput
-            onClose={() => setAuthModalState(AuthModalState.Hidden)}
+            onClose={onClose}
             onDone={(number) => {
               setNumber(number);
               setAuthStep(AuthStep.Code);
@@ -78,41 +72,33 @@ const AuthModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
           />
         );
       case AuthStep.Name:
-        return (
-          <NameInput onDone={() => setAuthModalState(AuthModalState.Hidden)} />
-        );
+        return <NameInput onDone={onClose} />;
     }
   };
 
   return (
     <ReactPortal wrapperId="portal">
-      <div
-        className={`auth-modal ${
-          authModalState === AuthModalState.Visible
-            ? "auth-modal-enter"
-            : "auth-modal-exit"
-        }`}
-      >
-        <div
-          className={`auth-modal-content ${
-            authModalState === AuthModalState.Visible
-              ? "auth-modal-content-enter"
-              : "auth-modal-content-exit"
-          }`}
-        >
-          {renderSwitch(authStep)}
-        </div>
-      </div>
-
-      {toastState.show && (
-        <Toast
-          message={toastState.message}
-          duration={3000}
-          onDone={() => {
-            setToastState({ show: false, message: "" });
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="auth-modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="auth-modal-content"
+              initial={{ y: "100%" }}
+              animate={{ y: "20px" }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {renderSwitch(authStep)}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </ReactPortal>
   );
 };

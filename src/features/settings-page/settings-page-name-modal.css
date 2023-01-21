@@ -1,0 +1,12 @@
+.settingspagename-modal {
+  padding: 16px;
+}
+
+.settingspagename-modal-savebtn {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+
+  padding: 24px 16px;
+}

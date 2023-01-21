@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../authSlice";
-import { createUser } from "../../../app/services/gastromiaApi";
-import Toast, { ToastState } from "../../toast/toast";
+import { setToastState } from "../../../app/store-slices/app-slice";
+import { setCredentials } from "../../../app/store-slices/auth-slice";
+import { createUser } from "../../../app/services/user-api";
+import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
 
 import { ReactComponent as Close } from "../../../assets/close@20px.svg";
-import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
 
 const NameInput: React.FC<{ onDone: () => void }> = ({ onDone }) => {
   const [name, setName] = useState<string>("");
-  const [toastState, setToastState] = useState<ToastState>({
-    show: false,
-    message: "",
-  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
+
+  const showToast = (message: string) => {
+    dispatch(
+      setToastState({
+        isOpen: true,
+        message: message,
+      })
+    );
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const re = /^[A-Za-z]+$/;
@@ -26,22 +31,14 @@ const NameInput: React.FC<{ onDone: () => void }> = ({ onDone }) => {
   const onClick = async () => {
     setIsLoading(true);
 
-    const result = await createUser(name);
+    const user = await createUser(name);
 
-    if (result.user) {
+    if (user) {
       // User was created
-      dispatch(setCredentials({ user: result.user }));
+      dispatch(setCredentials({ user: user }));
       onDone();
-    } else if (result.status === 400) {
-      setToastState({
-        show: true,
-        message: "Operazione fallita. Riprova a registrarti",
-      });
     } else {
-      setToastState({
-        show: true,
-        message: "Ops.. qualcosa è andato storto",
-      });
+      showToast("Ops.. qualcosa è andato storto");
     }
 
     setIsLoading(false);
@@ -76,24 +73,14 @@ const NameInput: React.FC<{ onDone: () => void }> = ({ onDone }) => {
               onClick={onClick}
               options={{
                 title: "Completa",
-                buttonColor: undefined,
-                showButton: !isLoading,
-                showSpinner: isLoading,
+                isEnabled: true,
+                isVisible: true,
+                isLoading: isLoading,
               }}
             />
           </div>
         )}
       </div>
-
-      {toastState.show && (
-        <Toast
-          message={toastState.message}
-          duration={3000}
-          onDone={() => {
-            setToastState({ show: false, message: "" });
-          }}
-        />
-      )}
     </React.Fragment>
   );
 };

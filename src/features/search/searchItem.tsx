@@ -1,10 +1,10 @@
 import React from "react";
-import { Item } from "../../app/services/gastromiaApi";
+import { Item } from "../../models/item";
 import "./searchItem.css";
 
 const SearchItem: React.FC<{ item: Item }> = ({ item }) => {
   return (
-    <a className="searchitem-content">
+    <a className="searchitem-content" href={`/items/${item._id}`}>
       <img className="searchitem-image" src={item.preview_url} />
       <div className="searchitem-infos">
         <span className="searchitem-name">{item.name}</span>

@@ -1,35 +1,44 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  selectCartCount,
+  selectCartTotal,
+  selectIsUpdatingSnapshot,
+} from "../../app/store-slices/cart-slice";
 import useClickOutside from "../../utils/useClickOutside";
 import ReactPortal from "../reactPortal/reactPortal";
+import { AnimatePresence, motion } from "framer-motion";
+import Cart from "../cart/cart";
+import { Player } from "@lottiefiles/react-lottie-player";
+import SpinnerJSON from "../../assets/spinner-animation-white.json";
 import "./cartDrawer.css";
-
-enum DrawerState {
-  Visible,
-  Hidden,
-}
 
 const CartDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
   isOpen,
   onClose,
 }) => {
-  const [drawerState, setDrawerState] = useState<DrawerState>(
-    DrawerState.Visible
-  );
   const drawerRef = useRef<HTMLDivElement>(null);
-
-  useClickOutside(drawerRef, () => setDrawerState(DrawerState.Hidden));
+  const location = useLocation();
+  const [firstLocation, setFirstLocation] = useState<string>("/");
+  const cartTotal = useSelector(selectCartTotal);
+  const cartCount = useSelector(selectCartCount);
+  const isUpdatingSnapshot = useSelector(selectIsUpdatingSnapshot);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined;
-    if (drawerState === DrawerState.Hidden) {
-      timeout = setTimeout(() => {
-        setDrawerState(DrawerState.Visible);
-        onClose();
-      }, 200);
+    if (isOpen) {
+      setFirstLocation(location.pathname);
     }
+  }, [isOpen]);
 
-    return () => clearTimeout(timeout);
-  }, [drawerState]);
+  useEffect(() => {
+    if (firstLocation !== location.pathname) {
+      onClose();
+    }
+  }, [location]);
+
+  useClickOutside(drawerRef, onClose);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,29 +48,64 @@ const CartDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     }
   }, [isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <ReactPortal wrapperId="portal">
-      <div
-        id="cartdrawer"
-        className={`cartdrawer ${
-          drawerState === DrawerState.Visible
-            ? "cartdrawer-enter"
-            : "cartdrawer-exit"
-        }`}
-      >
-        <div
-          className={`cartdrawer-content ${
-            drawerState === DrawerState.Visible
-              ? "cartdrawer-content-enter"
-              : "cartdrawer-content-exit"
-          }`}
-          ref={drawerRef}
-        ></div>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="cartdrawer"
+            className="cartdrawer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="cartdrawer-content"
+              initial={{ x: "100%" }}
+              animate={{ x: "0px" }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.2 }}
+              ref={drawerRef}
+            >
+              <Cart onClose={onClose} />
+
+              {cartCount > 0 ? (
+                <div className="cartdrawer-checkoutbtn-content">
+                  <button
+                    className="cartdrawer-checkoutbtn"
+                    onClick={() => {
+                      onClose();
+                      navigate("/checkout");
+                    }}
+                    disabled={isUpdatingSnapshot}
+                  >
+                    {isUpdatingSnapshot ? (
+                      <Player
+                        autoplay={true}
+                        loop={true}
+                        src={SpinnerJSON}
+                        style={{ height: "40px", width: "40px" }}
+                      ></Player>
+                    ) : (
+                      <React.Fragment>
+                        <span className="cartdrawer-checkoutbtn-title">
+                          Vai al checkout
+                        </span>
+                        <div className="cartdrawer-checkoutbtn-total-content">
+                          <span className="cartdrawer-checkoutbtn-total">
+                            €{(cartTotal / 1000).toFixed(2)}
+                          </span>
+                        </div>
+                      </React.Fragment>
+                    )}
+                  </button>
+                </div>
+              ) : null}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </ReactPortal>
   );
 };

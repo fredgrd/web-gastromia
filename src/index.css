@@ -41,6 +41,14 @@ button {
     sans-serif;
 }
 
+a {
+  all: unset;
+}
+
+img {
+  border: none;
+}
+
 /* #portal {
   position: fixed;
   top: 0px;

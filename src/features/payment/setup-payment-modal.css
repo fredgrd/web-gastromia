@@ -1,0 +1,58 @@
+.setuppayment-modal {
+  z-index: 1000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+
+  padding: 60px 0px 24px 0px;
+
+  overflow-y: scroll;
+
+  background-color: white;
+}
+
+.setuppayment-modal-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+}
+
+.setuppayment-modal-header-heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0px;
+}
+
+.setuppayment-modal-header-icon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50px;
+  left: 0px;
+}
+
+.setuppayment-modal-paymentinfo {
+  padding: 24px;
+}
+
+.setuppayment-modal-cardinput {
+  padding: 16px 12px;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+}
+
+.setuppayment-modal-save {
+  padding: 0px 24px;
+}

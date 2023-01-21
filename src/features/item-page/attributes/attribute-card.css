@@ -1,0 +1,53 @@
+.attributecard-content {
+  flex-shrink: 0;
+  position: relative;
+  height: 194px;
+  width: 130px;
+
+  overflow: hidden;
+}
+
+.attributecard-image {
+  height: 130px;
+  width: 130px;
+}
+
+.attributecard-price {
+  display: block;
+  flex-shrink: 0;
+
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 800;
+  text-align: start;
+}
+
+.attributecard-name {
+  display: block;
+  margin-top: 2px;
+
+  font-size: 15px;
+
+  font-weight: 400;
+  text-align: start;
+}
+
+.attributecard-pickerbtn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.attributecard-selecticon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+  background-color: #f6f7f8;
+}

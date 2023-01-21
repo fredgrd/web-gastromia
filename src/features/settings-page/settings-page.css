@@ -1,0 +1,128 @@
+.settingspage {
+  padding: 16px;
+}
+
+.settingspage-header-heading {
+  display: block;
+  margin: 0px;
+  padding: 0px 8px;
+
+  text-align: start;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.settingspage-break {
+  margin: 24px 0px 16px 0px;
+
+  border: 1px solid #e3e3e3;
+}
+
+.settingspage-section {
+  padding: 0px 8px;
+}
+
+.settingspage-section-header {
+  display: block;
+
+  text-align: start;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settingspage-section-entry {
+  margin-top: 16px;
+}
+
+.settingspage-section-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settingspage-section-entry-heading {
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.settingspage-section-entry-btn-positioner {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settingspage-section-entry-btn {
+  border: none;
+  background-color: white;
+
+  padding: 0px;
+
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #00ad0a;
+}
+
+.settingspage-section-entry-value {
+  display: block;
+
+  text-align: start;
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #757575;
+}
+
+.settingspage-addcardbtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  margin-top: 16px;
+  padding: 16px;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  background-color: white;
+}
+
+.settingspage-addcardbtn:active {
+  border: 1px solid #343537;
+  border-radius: 14px;
+  background-color: #fbfbfb;
+}
+
+.settingspage-addcardbtn-title {
+  margin-left: 8px;
+  margin-right: auto;
+
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settingspage-logoutbtn-positioner {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.settingspage-logoutbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px;
+
+  border: none;
+  background-color: white;
+}
+
+.settingspage-logoutbtn {
+  margin-left: 8px;
+
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+}

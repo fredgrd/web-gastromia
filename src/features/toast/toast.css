@@ -1,28 +1,18 @@
 .toast-content {
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
   top: 10px;
   left: 32px;
   right: 32px;
   padding: 12px 16px;
+  z-index: 10000;
 
   background-color: #282728;
   border-radius: 10px;
 
   animation-name: toast-entrance;
   animation-duration: 0.4s;
-}
-
-@keyframes toast-entrance {
-  from {
-    top: -40px;
-    opacity: 0;
-  }
-  to {
-    top: 10px;
-    opacity: 1;
-  }
 }
 
 .toast-icon {

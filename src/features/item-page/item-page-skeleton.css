@@ -1,0 +1,44 @@
+.itempageskeleton-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 104px);
+  width: 100%;
+
+  padding: 0px 16px;
+}
+
+.itempageskeleton-img {
+  width: 100%;
+  aspect-ratio: 1;
+
+  margin-top: 16px;
+
+  border-radius: 10px;
+}
+
+.itempageskeleton-name {
+  width: 170px;
+  height: 28px;
+
+  margin-top: 24px;
+
+  border-radius: 5px;
+}
+
+.itempageskeleton-desc1 {
+  width: calc(100% - 20px);
+  height: 18px;
+
+  margin-top: 16px;
+
+  border-radius: 5px;
+}
+
+.itempageskeleton-desc2 {
+  width: calc(100% - 80px);
+  height: 18px;
+
+  margin-top: 10px;
+
+  border-radius: 5px;
+}

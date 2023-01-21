@@ -1,0 +1,22 @@
+.orderspage-skeleton {
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+}
+
+.orderspage-skeleton-header {
+  height: 28px;
+  width: 45%;
+
+  border-radius: 5px;
+}
+
+.orderspage-skeleton-order {
+  height: 150px;
+  width: 100%;
+
+  margin-top: 24px;
+
+  border-radius: 10px;
+}

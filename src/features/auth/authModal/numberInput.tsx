@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Toast, { ToastState } from "../../toast/toast";
 import PrimaryButton from "../../gastromiaKit/buttons/primaryButton";
-import { startVerification } from "../../../app/services/gastromiaApi";
+import { startVerification } from "../../../app/services/auth-api";
+import { useDispatch } from "react-redux";
+import { setToastState } from "../../../app/store-slices/app-slice";
 
 import { ReactComponent as Close } from "../../../assets/close@20px.svg";
 
@@ -11,11 +12,17 @@ const NumberInput: React.FC<{
 }> = ({ onClose, onDone }) => {
   const countryCode = "+39";
   const [number, setNumber] = useState<string>("");
-  const [toastState, setToastState] = useState<ToastState>({
-    show: false,
-    message: "",
-  });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const showToast = (message: string) => {
+    dispatch(
+      setToastState({
+        isOpen: true,
+        message: message,
+      })
+    );
+  };
 
   // Handle keyboard inputs
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +38,7 @@ const NumberInput: React.FC<{
 
     if (!number.length) {
       setIsLoading(false);
-      setToastState({
-        show: true,
-        message: "Inserisci il tuo numero per continuare",
-      });
+      showToast("Inserisci il tuo numero per continuare");
       return;
     }
 
@@ -44,15 +48,9 @@ const NumberInput: React.FC<{
     if (result.success) {
       onDone(formattedNumber);
     } else if (result.status === 400) {
-      setToastState({
-        show: true,
-        message: "Operazione fallita. Controlla il numero e riprova",
-      });
+      showToast("Operazione fallita. Controlla il numero e riprova");
     } else {
-      setToastState({
-        show: true,
-        message: "Ops.. qualcosa è andato storto",
-      });
+      showToast("Ops.. qualcosa è andato storto");
     }
 
     setIsLoading(false);
@@ -98,21 +96,12 @@ const NumberInput: React.FC<{
           onClick={onClick}
           options={{
             title: "Continua",
-            buttonColor: undefined,
-            showButton: !isLoading,
-            showSpinner: isLoading,
+            isEnabled: true,
+            isVisible: true,
+            isLoading: isLoading,
           }}
         />
       </div>
-      {toastState.show && (
-        <Toast
-          message={toastState.message}
-          duration={3000}
-          onDone={() => {
-            setToastState({ show: false, message: "" });
-          }}
-        />
-      )}
     </React.Fragment>
   );
 };

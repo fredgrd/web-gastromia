@@ -1,0 +1,24 @@
+.attributerow-content {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0px 12px;
+
+  border-radius: 12px;
+  background-color: #f6f7f8;
+}
+
+.attributerow-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.attributerow-price {
+  margin-left: 8px;
+
+  font-size: 15px;
+  font-weight: 800;
+}

@@ -1,0 +1,119 @@
+.searchmodal {
+  z-index: 1000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+.searchmodal-enter {
+  animation: searchmodal-enter-animation;
+  animation-duration: 0.2s;
+}
+
+.searchmodal-exit {
+  animation: searchmodal-exit-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes searchmodal-enter-animation {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.24);
+  }
+}
+
+@keyframes searchmodal-exit-animation {
+  from {
+    background-color: rgba(0, 0, 0, 0.24);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.searchmodal-content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.searchmodal-content-enter {
+  animation: searchmodal-content-enter-animation;
+  animation-duration: 0.2s;
+}
+
+.searchmodal-content-exit {
+  animation: searchmodal-content-exit-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes searchmodal-content-enter-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes searchmodal-content-exit-animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.searchmodal-header {
+  margin-top: 16px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: 40px auto 40px;
+  grid-template-rows: 44px;
+  grid-template-areas: "closebtn mialogo . ";
+
+  align-items: center;
+}
+
+.searchmodal-header-closebtn {
+  height: 100%;
+  width: 100%;
+  grid-area: closebtn;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background-color: transparent;
+}
+
+.searchmodal-header-mialogo {
+  grid-area: mialogo;
+  justify-self: center;
+}
+
+.searchmodal-search-content {
+  flex: 1;
+  display: block;
+
+  padding: 0px 16px 32px 16px;
+
+  overflow-y: auto;
+
+  
+}

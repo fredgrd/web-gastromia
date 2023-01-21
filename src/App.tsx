@@ -1,50 +1,60 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "./features/auth/authSlice";
+import { AppDispatch } from "./app/store";
+import { fetchRemoteUser } from "./app/store-slices/auth-slice";
+import { fetchRemoteSnapshot } from "./app/store-slices/cart-slice";
 import "./App.css";
-
-import { getUser } from "./app/services/gastromiaApi";
 
 import Header from "./features/header/header";
 import CompressHeader from "./features/header/compressHeader";
 import Store from "./features/store/store";
+import ItemPage from "./features/item-page/item-page";
+import ExcludedItemsModal from "./features/cart/excludedItemsModal";
+import AuthModal from "./features/auth/authModal/authModal";
+import Toast from "./features/toast/toast";
+import Checkout from "./features/checkout/checkout";
+import OrdersPage from "./features/orders-page/orders-page";
+import SettingsPage from "./features/settings-page/settings-page";
+import NotFound from "./features/not-found/not-found";
+
+const stripePromise = loadStripe("pk_test_MVxV52uGwe6eYy4DjyPoJIkF005npSloTk");
 
 function App() {
-  const dispatch = useDispatch();
-
-  const getUserOnLoad = useCallback(async () => {
-    const result = await getUser();
-
-    if (result.user) {
-      dispatch(setCredentials({ user: result.user }));
-    }
-  }, [dispatch]);
+  const location = useLocation();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    getUserOnLoad();
-  }, [getUserOnLoad]);
+    dispatch(fetchRemoteUser());
+    dispatch(fetchRemoteSnapshot());
+  }, [dispatch]);
 
   return (
-    <div className="App">
-      <CompressHeader />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Store />} />
-        <Route
-          path="/items/:id"
-          element={
-            <div style={{ backgroundColor: "red", height: "200px" }}></div>
-          }
-        />
-      </Routes>
-      <button
-        style={{ height: "60px", width: "60px" }}
-        onClick={() => {
-          window.history.pushState(null, "Item", "/items/aja");
-        }}
-      ></button>
-    </div>
+    <React.StrictMode>
+      <Elements stripe={stripePromise}>
+        <div className="App">
+          {location.pathname !== "/checkout" ? (
+            <React.Fragment>
+              <CompressHeader />
+              <Header />
+            </React.Fragment>
+          ) : null}
+          <Routes>
+            <Route path="/" element={<Store />} />
+            <Route path="/items/:id" element={<ItemPage />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <ExcludedItemsModal />
+          <AuthModal />
+          <Toast />
+        </div>
+      </Elements>
+    </React.StrictMode>
   );
 }
 

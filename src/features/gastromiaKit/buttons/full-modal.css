@@ -1,0 +1,43 @@
+.fullmodal {
+  z-index: 1000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+
+  padding: 60px 0px 24px 0px;
+
+  overflow-y: scroll;
+
+  background-color: white;
+}
+
+.fullmodal-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+}
+
+.fullmodal-heading {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0px;
+}
+
+.fullmodal-icon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50px;
+  left: 0px;
+}

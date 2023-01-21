@@ -1,4 +1,5 @@
 .header {
+  z-index: 2;
   position: relative;
   background-color: white;
   padding: 8px;
@@ -70,7 +71,6 @@
 
   border: none;
   border-radius: 16px;
-  background-color: #f6f7f8;
 
   grid-area: cartbutton;
   cursor: pointer;
@@ -82,8 +82,7 @@
   flex-grow: 1;
 
   font-size: 15px;
-  font-weight: 600;
-  color: #343538;
+  font-weight: 700;
   padding: 0px 4px;
 }
 

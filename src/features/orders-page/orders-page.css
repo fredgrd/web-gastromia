@@ -1,0 +1,13 @@
+.orderspage {
+  padding: 16px;
+}
+
+.orderspage-header-heading {
+  display: block;
+  margin: 0px;
+  padding: 0px 8px;
+
+  text-align: start;
+  font-size: 18px;
+  font-weight: 700;
+}
