@@ -1,0 +1,35 @@
+.additiongroup-title {
+  display: block;
+  padding: 0px 16px;
+
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  text-align: start;
+}
+
+.additiongroup-description {
+  display: block;
+  margin-top: 4px;
+  padding: 0px 16px;
+
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+  text-align: start;
+}
+
+.additiongroup-break-small {
+  margin: 16px 0px;
+
+  border: none;
+  border-top: 1px solid #e8e9eb;
+}
+
+.additiongroup-additions-content {
+  display: flex;
+  overflow-y: hidden;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 0px 16px;
+}

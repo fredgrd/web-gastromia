@@ -1,0 +1,80 @@
+.orderspageorder {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 24px;
+  padding: 16px;
+
+  border-radius: 10px;
+  border: 1px solid #e3e3e3;
+}
+
+.orderspageorder-orderstatus-progressbar {
+  height: 8px;
+  width: 100%;
+
+  margin-bottom: 8px;
+
+  border-radius: 4px;
+  background-color: #f6f7f8;
+}
+
+.orderspageorder-orderstatus-progressbar-progress {
+  height: 8px;
+
+  border-radius: 4px;
+}
+
+.orderspageorder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orderspageorder-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.orderspageorder-header-info-code {
+  line-height: 22px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.orderspageorder-header-info-timedate {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #757575;
+}
+
+.orderspageorder-products {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.orderspageorder-products-info {
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #757575;
+}
+
+.orderspageorder-products-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  margin-top: 6px;
+}
+
+.orderspageorder-product {
+  height: 30px;
+  width: 30px;
+
+  border-radius: 3px;
+}

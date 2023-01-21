@@ -1,0 +1,91 @@
+.attributepickerbutton-previewbtn {
+  width: 28px;
+  height: 28px;
+
+  padding: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #f6f7f8;
+  border-radius: 16px;
+  background-color: #f6f7f8;
+
+  cursor: pointer;
+}
+
+.attributepickerbutton-previewbtn:active {
+  background-color: #d2d2d2;
+}
+
+.attributepickerbutton-extended-content {
+  height: 28px;
+  width: 126px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 16px;
+  background-color: #f6f7f8;
+}
+
+.attributepickerbutton-extended-removebtn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+
+  padding: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px;
+  margin: 0px;
+
+  border: 2px solid #f6f7f8;
+  border-radius: 16px 3px 3px 16px;
+  background-color: #f6f7f8;
+
+  cursor: pointer;
+}
+
+.attributepickerbutton-extended-removebtn:active {
+  background-color: #d2d2d2;
+}
+
+.attributepickerbutton-extended-addbtn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+
+  padding: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px;
+  margin: 0px;
+
+  border: 2px solid #f6f7f8;
+  border-radius: 3px 16px 16px 3px;
+  background-color: #f6f7f8;
+
+  cursor: pointer;
+}
+
+.attributepickerbutton-extended-addbtn:active {
+  background-color: #d2d2d2;
+}
+
+.attributepickerbutton-extended-count {
+  flex-grow: 1;
+
+  padding: 0px 6px;
+
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: 600;
+}

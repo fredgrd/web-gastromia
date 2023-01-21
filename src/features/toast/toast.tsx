@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectToastState,
@@ -14,7 +14,7 @@ import { AnimatePresence } from "framer-motion";
 const Toast: React.FC = () => {
   const state = useSelector(selectToastState);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     if (state.isOpen) {
       var timeout = setTimeout(() => {

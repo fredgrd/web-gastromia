@@ -1,0 +1,20 @@
+.cart-cartitems-empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: white;
+}
+
+.cart-cartitems-empty-img {
+  margin-top: 12px;
+}
+
+.cart-cartitems-empty-title {
+  margin-top: 12px;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #72767e;
+}
