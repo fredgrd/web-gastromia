@@ -39,7 +39,7 @@ button {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    color: #343538;
+  color: #343538;
 }
 
 a {
@@ -73,7 +73,7 @@ img {
   height: 55px;
   border: none;
   border-radius: 10px;
-  background-color: #2f7cf6;
+  background-color: #00ad0a;
   font-size: 18px;
   font-weight: 700;
   color: white;
@@ -83,7 +83,7 @@ img {
   border: none;
   font-size: 16px;
   font-weight: 700;
-  color: #2f7cf6;
+  color: #00ad0a;
   background-color: transparent;
   cursor: pointer;
 }
