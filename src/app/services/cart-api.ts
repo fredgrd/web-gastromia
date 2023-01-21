@@ -7,6 +7,8 @@ import {
 
 const baseUrl = "https://api.gastromia.com";
 
+axios.defaults.withCredentials = true;
+
 export const fetchCartSnapshot = async (): Promise<CartSnapshot | null> => {
   try {
     const response = await axios.get(baseUrl + "/cart", {

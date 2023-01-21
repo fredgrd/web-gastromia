@@ -4,6 +4,8 @@ import { isUser, User } from "../../models/user";
 
 const baseUrl = "https://api.gastromia.com";
 
+axios.defaults.withCredentials = true;
+
 // --------------------------------------------------------------------------
 // StartVerification
 
