@@ -43,7 +43,14 @@ export const completeVerification = async (
   code: string
 ): Promise<CompleteVerificationResult> => {
   try {
-    const response = await axios.post(baseUrl + "/auth/complete", { number, code });
+    const response = await axios.post(
+      baseUrl + "/auth/complete",
+      {
+        number,
+        code,
+      },
+      { withCredentials: true }
+    );
     const user: User | any = response.data.user;
 
     if (user && isUser(user)) {
@@ -71,11 +78,13 @@ export const completeVerification = async (
 };
 
 // --------------------------------------------------------------------------
-// CompleteVerification
+// Logout
 
 export const logout = async (): Promise<boolean> => {
   try {
-    const response = await axios.get(baseUrl + "/auth/logout", { withCredentials: true });
+    const response = await axios.get(baseUrl + "/auth/logout", {
+      withCredentials: true,
+    });
 
     if (response.status === 200) {
       return true;
@@ -84,7 +93,7 @@ export const logout = async (): Promise<boolean> => {
     }
   } catch (error) {
     const axiosError = error as AxiosError;
-    
+
     console.log(`AuthApi/logout error: ${axiosError}`);
     return false;
   }
