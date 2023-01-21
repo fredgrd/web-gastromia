@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { fetchOrders } from "../../app/services/order-api";
 import { selectCurrentUser } from "../../app/store-slices/auth-slice";
 import { Order } from "../../models/order";
+import NotFound from "../not-found/not-found";
 import OrderPageOrder from "./orders-page-order";
 import OrdersPageSkeleton from "./orders-page-skeleton";
 import "./orders-page.css";
@@ -42,6 +43,7 @@ const OrdersPage: React.FC = () => {
       <div className="orderspage-header">
         <h2 className="orderspage-header-heading">I tuoi ordini</h2>
       </div>
+      {!orders.length && <NotFound />}
       {orders
         .sort((a, b) => {
           const aDate = new Date(a.created_at);
