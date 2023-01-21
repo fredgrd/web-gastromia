@@ -11,8 +11,6 @@ export const fetchUser = async (): Promise<User | null> => {
     });
     const user: User | any = response.data;
 
-    console.log("FETCHUSER", user);
-
     if (user && isUser(user)) {
       console.log("ENTERED ISUSER", user);
       return user;

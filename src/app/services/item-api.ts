@@ -35,12 +35,6 @@ export const searchItems = async (query: string): Promise<Item[] | null> => {
     );
     const items: Item[] | any = response.data.items;
 
-    console.log(
-      "SEARCHITEMS:",
-      response.data.items,
-      isItems(response.data.items)
-    );
-
     if (items && isItems(items)) {
       return items;
     } else {
