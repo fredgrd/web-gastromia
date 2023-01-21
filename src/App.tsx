@@ -20,7 +20,7 @@ import OrdersPage from "./features/orders-page/orders-page";
 import SettingsPage from "./features/settings-page/settings-page";
 import NotFound from "./features/not-found/not-found";
 
-const stripePromise = loadStripe("pk_test_MVxV52uGwe6eYy4DjyPoJIkF005npSloTk");
+const stripePromise = loadStripe("pk_live_DkqPxdrp6DcUPaoEjhfEMg3P00uPnlvRFz");
 
 function App() {
   const location = useLocation();
