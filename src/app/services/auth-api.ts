@@ -2,6 +2,8 @@ import axios, { AxiosError } from "axios";
 import { ApiOperation } from "../../models/api-operation";
 import { isUser, User } from "../../models/user";
 
+const baseUrl = "https://api.gastromia.com";
+
 // --------------------------------------------------------------------------
 // StartVerification
 
@@ -9,7 +11,7 @@ export const startVerification = async (
   number: string
 ): Promise<ApiOperation> => {
   try {
-    const response = await axios.post("/auth/start", { number });
+    const response = await axios.post(baseUrl + "/auth/start", { number });
 
     return {
       success: true,
@@ -41,7 +43,7 @@ export const completeVerification = async (
   code: string
 ): Promise<CompleteVerificationResult> => {
   try {
-    const response = await axios.post("/auth/complete", { number, code });
+    const response = await axios.post(baseUrl + "/auth/complete", { number, code });
     const user: User | any = response.data.user;
 
     if (user && isUser(user)) {
@@ -73,7 +75,7 @@ export const completeVerification = async (
 
 export const logout = async (): Promise<boolean> => {
   try {
-    const response = await axios.get("/auth/logout", { withCredentials: true });
+    const response = await axios.get(baseUrl + "/auth/logout", { withCredentials: true });
 
     if (response.status === 200) {
       return true;

@@ -1,9 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { Card, isCards } from "../../models/card";
 
+const baseUrl = "https://api.gastromia.com";
+
 export const createSetupIntent = async (): Promise<string | null> => {
   try {
-    const response = await axios.post("/payment/setup", {
+    const response = await axios.post(baseUrl + "/payment/setup", {
       withCredentials: true,
     });
     const clientSecret: string | undefined = response.data.client_secret;
@@ -26,7 +28,7 @@ export const createSetupIntent = async (): Promise<string | null> => {
 
 export const fetchCards = async (): Promise<Card[] | null> => {
   try {
-    const response = await axios.get("/payment/cards", {
+    const response = await axios.get(baseUrl + "/payment/cards", {
       withCredentials: true,
     });
     const cards: Card[] | undefined = response.data.cards;
@@ -50,7 +52,7 @@ export const fetchCards = async (): Promise<Card[] | null> => {
 export const detachCard = async (id: string): Promise<boolean> => {
   try {
     const response = await axios.patch(
-      "/payment/detach",
+      baseUrl + "/payment/detach",
       { payment_method_id: id },
       {
         withCredentials: true,

@@ -1,10 +1,14 @@
 import axios, { AxiosError } from "axios";
 import { User, isUser } from "../../models/user";
 
+const baseUrl = "https://api.gastromia.com";
+
 // Fetches the user document
 export const fetchUser = async (): Promise<User | null> => {
   try {
-    const response = await axios.get("/user/fetch", { withCredentials: true });
+    const response = await axios.get(baseUrl + "/user/fetch", {
+      withCredentials: true,
+    });
     const user: User | any = response.data;
 
     console.log("FETCHUSER", user);
@@ -31,7 +35,7 @@ export const fetchUser = async (): Promise<User | null> => {
 export const createUser = async (name: string): Promise<User | null> => {
   try {
     const response = await axios.post(
-      "/user/create",
+      baseUrl + "/user/create",
       { name },
       { withCredentials: true }
     );
@@ -65,7 +69,7 @@ export const updateUser = async (update: {
 
   try {
     const response = await axios.patch(
-      "/user/update",
+      baseUrl + "/user/update",
       { update: update },
       { withCredentials: true }
     );

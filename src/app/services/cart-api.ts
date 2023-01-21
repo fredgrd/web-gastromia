@@ -5,9 +5,13 @@ import {
   isCartSnapshot,
 } from "../../models/cart-snapshot";
 
+const baseUrl = "https://api.gastromia.com";
+
 export const fetchCartSnapshot = async (): Promise<CartSnapshot | null> => {
   try {
-    const response = await axios.get("/cart", { withCredentials: true });
+    const response = await axios.get(baseUrl + "/cart", {
+      withCredentials: true,
+    });
     const snapshot: CartSnapshot | any = response.data;
 
     if (snapshot && isCartSnapshot(snapshot)) {
@@ -31,7 +35,7 @@ export const updateCartSnapshot = async (
 ): Promise<CartSnapshot | null> => {
   try {
     const response = await axios.patch(
-      "/cart/snapshot",
+      baseUrl + "/cart/snapshot",
       { items_snapshot: items },
       {
         withCredentials: true,
