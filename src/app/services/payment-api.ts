@@ -3,11 +3,9 @@ import { Card, isCards } from "../../models/card";
 
 const baseUrl = "https://api.gastromia.com";
 
-axios.defaults.withCredentials = true;
-
 export const createSetupIntent = async (): Promise<string | null> => {
   try {
-    const response = await axios.post(baseUrl + "/payment/setup", {
+    const response = await axios.get(baseUrl + "/payment/setup", {
       withCredentials: true,
     });
     const clientSecret: string | undefined = response.data.client_secret;

@@ -3,8 +3,6 @@ import { User, isUser } from "../../models/user";
 
 const baseUrl = "https://api.gastromia.com";
 
-axios.defaults.withCredentials = true;
-
 // Fetches the user document
 export const fetchUser = async (): Promise<User | null> => {
   try {

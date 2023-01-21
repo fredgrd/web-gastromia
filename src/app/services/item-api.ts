@@ -4,8 +4,6 @@ import { Item, isItems, isItem } from "../../models/item";
 
 const baseUrl = "https://api.gastromia.com";
 
-axios.defaults.withCredentials = true;
-
 export const fetchCategory = async (
   category: string
 ): Promise<Item[] | null> => {
