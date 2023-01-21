@@ -8,7 +8,7 @@
 }
 
 .itemcard-content-notavailable {
-  filter: grayscale(100%);
+  filter: grayscale(1);
 }
 
 .itemcard-image-content {
@@ -19,6 +19,7 @@
 
 .itemcard-image-content-notavailable {
   opacity: 80%;
+  filter: grayscale(1);
 }
 
 .itemcard-image {
@@ -138,7 +139,7 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: 5px ;
+  border-radius: 5px;
   background-color: #343538;
 }
 

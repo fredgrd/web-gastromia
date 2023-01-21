@@ -16,6 +16,7 @@ const OrdersPageOrderModalItem: React.FC<{ item: CartItemSnapshot }> = ({
           <img
             className="orderspageordermodal-item-img"
             src={item.preview_url}
+            alt=""
           />
           <span className="orderspageordermodal-item-name">{item.name}</span>
         </div>

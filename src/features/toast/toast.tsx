@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../app/hooks";
 import {
   selectToastState,
   setToastState,
 } from "../../app/store-slices/app-slice";
-import { motion } from "framer-motion";
+
 import "./toast.css";
 
 import ReactPortal from "../reactPortal/reactPortal";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { ReactComponent as ToastInfoIcon } from "../../assets/toast-info@24px.svg";
-import { AnimatePresence } from "framer-motion";
 
 const Toast: React.FC = () => {
   const state = useSelector(selectToastState);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (state.isOpen) {
@@ -25,7 +27,7 @@ const Toast: React.FC = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [state]);
+  }, [state, dispatch]);
 
   return (
     <ReactPortal wrapperId="portal">
