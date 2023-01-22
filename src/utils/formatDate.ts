@@ -33,7 +33,7 @@ const formatDate = (
     }
 
     if (fmt === "dd") {
-      formattedDate += date.getUTCDay();
+      formattedDate += date.getDay();
     }
   });
 

@@ -11,7 +11,7 @@ const formatTime = (dateString: string, format: string = "hh-mm"): string => {
     }
 
     if (fmt === "mm") {
-      const minutes = date.getHours();
+      const minutes = date.getMinutes();
       formattedTime += minutes < 10 ? "0" + minutes : minutes;
     }
   });
