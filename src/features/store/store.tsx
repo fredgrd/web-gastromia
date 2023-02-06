@@ -33,8 +33,11 @@ const Store: React.FC = () => {
         </div>
       </div>
       <StoreSection title="Poké" category="poké" />
+      <StoreSection title="Crea il tuo Poké" category="Crea il tuo poké" />
       <StoreSection title="Salads" category="salads" />
-      {/* <StoreSection title="Pita" category="mains>pita" /> */}
+      <StoreSection title="Pita" category="pita" />
+      <StoreSection title="Mexican" category="mexican" />
+      <StoreSection title="Sides & Dips" category="Sides & Dips" />
       <StoreSection title="Drinks" category="drinks" />
     </div>
   );
