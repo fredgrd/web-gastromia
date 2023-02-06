@@ -37,7 +37,6 @@ const Store: React.FC = () => {
       <StoreSection title="Salads" category="salads" />
       <StoreSection title="Pita" category="pita" />
       <StoreSection title="Mexican" category="mexican" />
-      <StoreSection title="Sides & Dips" category="Sides & Dips" />
       <StoreSection title="Drinks" category="drinks" />
     </div>
   );
