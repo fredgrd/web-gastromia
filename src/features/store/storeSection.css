@@ -79,3 +79,12 @@
   overflow-x: scroll;
   overflow-y: hidden;
 }
+
+.storesection-items-content::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome browsers */
+}
+
+.storesection-items-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;  /* mozilla */
+}
