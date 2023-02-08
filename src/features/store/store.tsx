@@ -36,7 +36,7 @@ const Store: React.FC = () => {
       <StoreSection title="Crea il tuo Poké" category="Crea il tuo poké" />
       <StoreSection title="Salads" category="salads" />
       <StoreSection title="Pita" category="pita" />
-      <StoreSection title="Mexican" category="mexican" />
+      <StoreSection title="Mexican 🇲🇽" category="mexican" />
       <StoreSection title="Sides & Dips" category="sides" />
       <StoreSection title="Drinks" category="drinks" />
     </div>
