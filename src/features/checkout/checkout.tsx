@@ -25,7 +25,6 @@ import CheckoutTimePickerModal from "./checkout-timepicker-modal";
 import SetupPaymentModal from "../payment/setup-payment-modal";
 import Skeleton from "../skeleton/skeleton";
 import PrimaryButton from "../gastromiaKit/buttons/primaryButton";
-import EmptyCart from "../cart/cart-emptycart";
 
 import { ReactComponent as GastromiaLogo } from "../../assets/gastromia-logo@24px.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/calendar@25px.svg";
@@ -108,6 +107,8 @@ const Checkout: React.FC = () => {
       card_payment: card !== undefined,
       card_payment_method: card ? card.id : "",
     });
+
+    console.log("RESPONSE", response)
 
     if (
       // Order is paid in cash
