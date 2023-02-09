@@ -60,6 +60,7 @@ const Checkout: React.FC = () => {
   const [cash, setCash] = useState<boolean>(false);
   const [setupPaymentIsOpen, setSetupPaymentIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
   const user = useSelector(selectCurrentUser);
   const cart = useSelector(selectCart);
@@ -77,7 +78,6 @@ const Checkout: React.FC = () => {
     const cards = await fetchCards();
     if (cards) {
       setCards(cards);
-      console.log(cards);
     }
 
     setUpdatingCards(false);
@@ -108,21 +108,16 @@ const Checkout: React.FC = () => {
       card_payment_method: card ? card.id : '',
     });
 
-    console.log('RESPONSE', response);
-
     if (
       // Order is paid in cash
       response &&
       response.order_id &&
       response.order_status === 'submitted'
     ) {
+      setIsNavigating(true);
       navigate('/orders');
       dispatch(updateCart({ included: [], excluded: [] }));
       dispatch(updateRemoteSnapshot());
-
-      console.log('ORDER WITH CASH');
-
-
     } else if (
       // Order is paid by card
       response &&
@@ -131,7 +126,6 @@ const Checkout: React.FC = () => {
       response.client_secret &&
       card
     ) {
-      console.log('ORDER WITH CARD');
       // Confirm card payment
       const result = await stripe?.confirmCardPayment(response.client_secret, {
         payment_method: card.id,
@@ -150,6 +144,7 @@ const Checkout: React.FC = () => {
         );
 
         if (orderUpdate.success) {
+          setIsNavigating(true);
           navigate('/orders');
           dispatch(updateCart({ included: [], excluded: [] }));
           dispatch(updateRemoteSnapshot());
@@ -197,8 +192,7 @@ const Checkout: React.FC = () => {
     setIsLoading(false);
   };
 
-  if (user === null || !cart.length) {
-    console.log('ORDER WITH NULL');
+  if ((user === null || !cart.length) && !isNavigating) {
     return <Navigate to="/" replace />;
   }
 

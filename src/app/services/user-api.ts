@@ -1,21 +1,19 @@
-import axios, { AxiosError } from "axios";
-import { User, isUser } from "../../models/user";
+import axios, { AxiosError } from 'axios';
+import { User, isUser } from '../../models/user';
 
-const baseUrl = "https://api.gastromia.com";
+const baseUrl = 'https://api.gastromia.com';
 
 // Fetches the user document
 export const fetchUser = async (): Promise<User | null> => {
   try {
-    const response = await axios.get(baseUrl + "/user/fetch", {
+    const response = await axios.get(baseUrl + '/user/fetch', {
       withCredentials: true,
     });
     const user: User | any = response.data;
 
     if (user && isUser(user)) {
-      console.log("ENTERED ISUSER", user);
       return user;
     } else {
-      console.log("ENTERED USER NULL", user);
       return null;
     }
   } catch (error) {
@@ -33,7 +31,7 @@ export const fetchUser = async (): Promise<User | null> => {
 export const createUser = async (name: string): Promise<User | null> => {
   try {
     const response = await axios.post(
-      baseUrl + "/user/create",
+      baseUrl + '/user/create',
       { name },
       { withCredentials: true }
     );
@@ -67,7 +65,7 @@ export const updateUser = async (update: {
 
   try {
     const response = await axios.patch(
-      baseUrl + "/user/update",
+      baseUrl + '/user/update',
       { update: update },
       { withCredentials: true }
     );
@@ -80,11 +78,6 @@ export const updateUser = async (update: {
     }
   } catch (error) {
     const axiosError = error as AxiosError;
-    console.log(
-      `UpdateUser error: ${
-        (axiosError.response?.status, axiosError.response?.statusText)
-      }`
-    );
     return null;
   }
 };
