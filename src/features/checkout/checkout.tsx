@@ -60,7 +60,7 @@ const Checkout: React.FC = () => {
   const [cash, setCash] = useState<boolean>(false);
   const [setupPaymentIsOpen, setSetupPaymentIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isNavigating, setIsNavigating] = useState<boolean>(false);
+  const [isDone, setIsDone] = useState<boolean>(false);
 
   const user = useSelector(selectCurrentUser);
   const cart = useSelector(selectCart);
@@ -93,15 +93,26 @@ const Checkout: React.FC = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (isDone) {
+      dispatch(updateCart({ included: [], excluded: [] }));
+      dispatch(updateRemoteSnapshot());
+      navigate('/orders');
+    }
+  }, [isDone]);
+
   const onSubmit = async () => {
-    if (isLoading) {
+    if (isLoading || !user) {
       return;
     }
 
     setIsLoading(true);
 
     const response = await createOrder({
+      user_name: user.name,
+      user_number: user.number,
       items_snapshot: cart,
+      info: instructions || '',
       interval: `${interval?.start}-${interval?.end}`,
       cash_payment: cash,
       card_payment: card !== undefined,
@@ -114,10 +125,7 @@ const Checkout: React.FC = () => {
       response.order_id &&
       response.order_status === 'submitted'
     ) {
-      setIsNavigating(true);
-      navigate('/orders');
-      dispatch(updateCart({ included: [], excluded: [] }));
-      dispatch(updateRemoteSnapshot());
+      setIsDone(true);
     } else if (
       // Order is paid by card
       response &&
@@ -144,10 +152,7 @@ const Checkout: React.FC = () => {
         );
 
         if (orderUpdate.success) {
-          setIsNavigating(true);
-          navigate('/orders');
-          dispatch(updateCart({ included: [], excluded: [] }));
-          dispatch(updateRemoteSnapshot());
+          setIsDone(true);
         } else {
           dispatch(
             setToastState({
@@ -192,7 +197,7 @@ const Checkout: React.FC = () => {
     setIsLoading(false);
   };
 
-  if ((user === null || !cart.length) && !isNavigating) {
+  if (cart.length && !isDone) {
     return <Navigate to="/" replace />;
   }
 

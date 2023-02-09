@@ -4,7 +4,10 @@ import { CartItemSnapshot } from './cart-snapshot';
 // Interfaces
 
 export interface CreateOrderData {
+  user_name: string;
+  user_number: string;
   items_snapshot: CartItemSnapshot[];
+  info: string;
   interval: string;
   cash_payment: boolean;
   card_payment: boolean;
@@ -23,8 +26,11 @@ export interface Order {
   _id?: string;
   code?: string;
   user_id: string;
+  user_name: string;
+  user_number: string;
   interval: string;
   items: CartItemSnapshot[];
+  info: string;
   total: number;
   status: string;
   cash_payment: boolean;
@@ -57,8 +63,11 @@ export const isOrder = (order: any): order is Order => {
     unsafeCast._id !== undefined &&
     unsafeCast.code !== undefined &&
     unsafeCast.user_id !== undefined &&
+    unsafeCast.user_name !== undefined &&
+    unsafeCast.user_number !== undefined &&
     unsafeCast.interval !== undefined &&
     unsafeCast.items !== undefined &&
+    unsafeCast.info !== undefined &&
     unsafeCast.total !== undefined &&
     unsafeCast.status !== undefined &&
     unsafeCast.card_payment !== undefined &&
