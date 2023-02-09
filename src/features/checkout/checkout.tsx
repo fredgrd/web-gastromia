@@ -116,12 +116,13 @@ const Checkout: React.FC = () => {
       response.order_id &&
       response.order_status === 'submitted'
     ) {
+      navigate('/orders');
       dispatch(updateCart({ included: [], excluded: [] }));
       dispatch(updateRemoteSnapshot());
 
       console.log('ORDER WITH CASH');
 
-      navigate('/orders');
+
     } else if (
       // Order is paid by card
       response &&
