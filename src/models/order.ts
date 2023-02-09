@@ -1,4 +1,4 @@
-import { CartItemSnapshot } from "./cart-snapshot";
+import { CartItemSnapshot } from './cart-snapshot';
 
 // --------------------------------------------------------------------------
 // Interfaces
@@ -81,19 +81,19 @@ export const areOrders = (orders: any[]): orders is Order[] => {
 };
 
 export const statusToPct = (status: string): number => {
-  if (status === "submitted") {
+  if (status === 'submitted') {
     return 40;
   }
 
-  if (status === "accepted") {
+  if (status === 'accepted') {
     return 60;
   }
 
-  if (status === "ready" || status === "stalled") {
+  if (status === 'ready' || status === 'stalled') {
     return 80;
   }
 
-  if (status === "completed") {
+  if (status === 'completed') {
     return 100;
   }
 
@@ -101,65 +101,65 @@ export const statusToPct = (status: string): number => {
 };
 
 export const formatStatus = (status: string): string => {
-  if (status === "submitted") {
-    return "Inviato";
+  if (status === 'submitted') {
+    return 'Inviato';
   }
 
-  if (status === "accepted") {
-    return "Accettato";
+  if (status === 'accepted') {
+    return 'Accettato';
   }
 
-  if (status === "ready") {
-    return "Pronto";
+  if (status === 'ready') {
+    return 'Pronto';
   }
 
-  if (status === "completed") {
-    return "Completato";
+  if (status === 'completed') {
+    return 'Completato';
   }
 
-  if (status === "stalled") {
-    return "Fermo";
+  if (status === 'stalled') {
+    return 'Fermo';
   }
 
-  if (status === "refunded") {
-    return "Rimborsato";
+  if (status === 'refunded') {
+    return 'Rimborsato';
   }
 
-  if (status === "rejected") {
-    return "Rifiutato";
+  if (status === 'rejected') {
+    return 'Rifiutato';
   }
 
-  return "";
+  return '';
 };
 
 export const statusToColor = (status: string): string => {
-  if (status === "submitted") {
-    return "#F6D22D";
+  if (status === 'submitted') {
+    return '#F6D22D';
   }
 
-  if (status === "accepted") {
-    return "#00AD0A";
+  if (status === 'accepted') {
+    return '#00AD0A';
   }
 
-  if (status === "ready") {
-    return "#00AD0A";
+  if (status === 'ready') {
+    return '#00AD0A';
   }
 
-  if (status === "completed") {
-    return "#00AD0A";
+  if (status === 'completed') {
+    return '#00AD0A';
   }
 
-  if (status === "stalled") {
-    return "#FFAA00";
+  if (status === 'stalled') {
+    return '#FFAA00';
   }
 
-  if (status === "refunded") {
-    return "#343537";
+  if (status === 'refunded') {
+    return '#343537';
   }
 
-  if (status === "rejected") {
-    return "#FF465C";
+  if (status === 'rejected') {
+    return '#FF465C';
   }
 
-  return "";
+  return '';
 };

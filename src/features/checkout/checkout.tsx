@@ -1,45 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { fetchCards } from "../../app/services/payment-api";
-import { useStripe } from "@stripe/react-stripe-js";
-import { Navigate, useNavigate } from "react-router-dom";
-import { AppDispatch } from "../../app/store";
-import { useDispatch, useSelector } from "react-redux";
-import { setToastState } from "../../app/store-slices/app-slice";
+import React, { useEffect, useState } from 'react';
+import { fetchCards } from '../../app/services/payment-api';
+import { useStripe } from '@stripe/react-stripe-js';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToastState } from '../../app/store-slices/app-slice';
 import {
   selectCart,
   selectCartCount,
   selectCartTotal,
   updateCart,
   updateRemoteSnapshot,
-} from "../../app/store-slices/cart-slice";
-import { createOrder, updatePaidOrder } from "../../app/services/order-api";
-import { selectCurrentUser } from "../../app/store-slices/auth-slice";
-import { Card } from "../../models/card";
-import { Interval } from "../../models/interval";
-import { CartItemSnapshot } from "../../models/cart-snapshot";
-import formatMinuteTime from "../../utils/formatMinuteTime";
-import "./checkout.css";
+} from '../../app/store-slices/cart-slice';
+import { createOrder, updatePaidOrder } from '../../app/services/order-api';
+import { selectCurrentUser } from '../../app/store-slices/auth-slice';
+import { Card } from '../../models/card';
+import { Interval } from '../../models/interval';
+import { CartItemSnapshot } from '../../models/cart-snapshot';
+import formatMinuteTime from '../../utils/formatMinuteTime';
+import './checkout.css';
 
-import CheckoutSelectorButton from "./checkout-selector-button";
-import CheckoutTimePickerModal from "./checkout-timepicker-modal";
-import SetupPaymentModal from "../payment/setup-payment-modal";
-import Skeleton from "../skeleton/skeleton";
-import PrimaryButton from "../gastromiaKit/buttons/primaryButton";
+import CheckoutSelectorButton from './checkout-selector-button';
+import CheckoutTimePickerModal from './checkout-timepicker-modal';
+import SetupPaymentModal from '../payment/setup-payment-modal';
+import Skeleton from '../skeleton/skeleton';
+import PrimaryButton from '../gastromiaKit/buttons/primaryButton';
 
-import { ReactComponent as GastromiaLogo } from "../../assets/gastromia-logo@24px.svg";
-import { ReactComponent as CalendarIcon } from "../../assets/calendar@25px.svg";
-import { ReactComponent as AddCardIcon } from "../../assets/card@25px.svg";
-import { ReactComponent as RadioRestIcon } from "../../assets/radio-rest@20px.svg";
-import { ReactComponent as RadioSelectedIcon } from "../../assets/radio-selected@20px.svg";
-import { ReactComponent as ArrowDownIcon } from "../../assets/arrow-down@16px.svg";
-import LocationPinIcon from "../../assets/icons/locationpin@24px.png";
-import LocationPinGreenIcon from "../../assets/icons/locationpin-green@24px.png";
-import ClockIcon from "../../assets/icons/clock@24px.png";
-import ClockGreenIcon from "../../assets/icons/clock-green@24px.png";
-import EditIcon from "../../assets/icons/edit@24px.png";
-import EditGreenIcon from "../../assets/icons/edit-green@24px.png";
-import PaymentCardIcon from "../../assets/icons/paymentcard@24px.png";
-import PaymentCardGreenIcon from "../../assets/icons/paymentcard-green@24px.png";
+import { ReactComponent as GastromiaLogo } from '../../assets/gastromia-logo@24px.svg';
+import { ReactComponent as CalendarIcon } from '../../assets/calendar@25px.svg';
+import { ReactComponent as AddCardIcon } from '../../assets/card@25px.svg';
+import { ReactComponent as RadioRestIcon } from '../../assets/radio-rest@20px.svg';
+import { ReactComponent as RadioSelectedIcon } from '../../assets/radio-selected@20px.svg';
+import { ReactComponent as ArrowDownIcon } from '../../assets/arrow-down@16px.svg';
+import LocationPinIcon from '../../assets/icons/locationpin@24px.png';
+import LocationPinGreenIcon from '../../assets/icons/locationpin-green@24px.png';
+import ClockIcon from '../../assets/icons/clock@24px.png';
+import ClockGreenIcon from '../../assets/icons/clock-green@24px.png';
+import EditIcon from '../../assets/icons/edit@24px.png';
+import EditGreenIcon from '../../assets/icons/edit-green@24px.png';
+import PaymentCardIcon from '../../assets/icons/paymentcard@24px.png';
+import PaymentCardGreenIcon from '../../assets/icons/paymentcard-green@24px.png';
 
 const flatCart = (cart: CartItemSnapshot[]): CartItemSnapshot[] => {
   const flat: CartItemSnapshot[] = cart.flatMap((snapshot) =>
@@ -52,7 +52,7 @@ const flatCart = (cart: CartItemSnapshot[]): CartItemSnapshot[] => {
 const Checkout: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [updatingCards, setUpdatingCards] = useState<boolean>(false);
-  const [address, _] = useState<string>("Via Ostiense 457D, Roma 00152");
+  const [address, _] = useState<string>('Via Ostiense 457D, Roma 00152');
   const [interval, setInterval] = useState<Interval | undefined>();
   const [timePickerIsOpen, setTimePickerIsOpen] = useState<boolean>(false);
   const [instructions, setInstructions] = useState<string | undefined>();
@@ -89,7 +89,7 @@ const Checkout: React.FC = () => {
 
   useEffect(() => {
     if (user === null) {
-      navigate("/");
+      navigate('/');
     }
   }, [user]);
 
@@ -105,29 +105,32 @@ const Checkout: React.FC = () => {
       interval: `${interval?.start}-${interval?.end}`,
       cash_payment: cash,
       card_payment: card !== undefined,
-      card_payment_method: card ? card.id : "",
+      card_payment_method: card ? card.id : '',
     });
 
-    console.log("RESPONSE", response)
+    console.log('RESPONSE', response);
 
     if (
       // Order is paid in cash
       response &&
       response.order_id &&
-      response.order_status === "submitted"
+      response.order_status === 'submitted'
     ) {
       dispatch(updateCart({ included: [], excluded: [] }));
       dispatch(updateRemoteSnapshot());
 
-      navigate("/orders");
+      console.log('ORDER WITH CASH');
+
+      navigate('/orders');
     } else if (
       // Order is paid by card
       response &&
       response.order_id &&
-      response.order_status === "pending" &&
+      response.order_status === 'pending' &&
       response.client_secret &&
       card
     ) {
+      console.log('ORDER WITH CARD');
       // Confirm card payment
       const result = await stripe?.confirmCardPayment(response.client_secret, {
         payment_method: card.id,
@@ -136,7 +139,7 @@ const Checkout: React.FC = () => {
       if (
         result &&
         result.paymentIntent &&
-        result.paymentIntent.status === "succeeded"
+        result.paymentIntent.status === 'succeeded'
       ) {
         // Card payment successfull
         // update the backend
@@ -146,10 +149,9 @@ const Checkout: React.FC = () => {
         );
 
         if (orderUpdate.success) {
+          navigate('/orders');
           dispatch(updateCart({ included: [], excluded: [] }));
           dispatch(updateRemoteSnapshot());
-
-          navigate("/orders");
         } else {
           dispatch(
             setToastState({
@@ -163,7 +165,7 @@ const Checkout: React.FC = () => {
         dispatch(
           setToastState({
             isOpen: true,
-            message: "Il pagamento non è andato a buon fine",
+            message: 'Il pagamento non è andato a buon fine',
           })
         );
       }
@@ -171,7 +173,7 @@ const Checkout: React.FC = () => {
       dispatch(
         setToastState({
           isOpen: true,
-          message: "Ci sono stati problemi con il tuo carrello",
+          message: 'Ci sono stati problemi con il tuo carrello',
         })
       );
       dispatch(
@@ -180,7 +182,7 @@ const Checkout: React.FC = () => {
       dispatch(updateRemoteSnapshot());
 
       if (!response.included.length) {
-        navigate("/");
+        navigate('/');
       }
     } else {
       dispatch(
@@ -195,12 +197,13 @@ const Checkout: React.FC = () => {
   };
 
   if (user === null || !cart.length) {
+    console.log('ORDER WITH NULL');
     return <Navigate to="/" replace />;
   }
 
   return (
     <div className="checkout">
-      <div className="checkout-header" onClick={() => navigate("/")}>
+      <div className="checkout-header" onClick={() => navigate('/')}>
         <GastromiaLogo className="checkout-header-logo" />
       </div>
 
@@ -218,7 +221,7 @@ const Checkout: React.FC = () => {
           <CheckoutSelectorButton
             isEnabled={false}
             options={{
-              title: "Gastromia Ostiense",
+              title: 'Gastromia Ostiense',
               subtitle: address,
               iconRest: LocationPinIcon,
               iconSelected: LocationPinGreenIcon,
@@ -230,7 +233,7 @@ const Checkout: React.FC = () => {
           <CheckoutSelectorButton
             isEnabled={true}
             options={{
-              title: "Orario di pickup",
+              title: 'Orario di pickup',
               subtitle: interval
                 ? `${formatMinuteTime(interval.start)} - ${formatMinuteTime(
                     interval.end
@@ -257,7 +260,7 @@ const Checkout: React.FC = () => {
               </div>
               <ArrowDownIcon
                 fill="#BDBDBD"
-                style={{ transform: "rotateZ(-90deg)" }}
+                style={{ transform: 'rotateZ(-90deg)' }}
               />
             </button>
           </CheckoutSelectorButton>
@@ -273,7 +276,7 @@ const Checkout: React.FC = () => {
           <CheckoutSelectorButton
             isEnabled={true}
             options={{
-              title: "Istruzioni aggiuntive",
+              title: 'Istruzioni aggiuntive',
               subtitle: instructions
                 ? instructions
                 : "Aggiungi istruzioni per l'ordine",
@@ -293,12 +296,12 @@ const Checkout: React.FC = () => {
           <CheckoutSelectorButton
             isEnabled={true}
             options={{
-              title: "Pagamento",
+              title: 'Pagamento',
               subtitle: card
                 ? `${card.brand.toUpperCase()} *${card.last4}`
                 : cash
-                ? "Pagamento in contanti"
-                : "Seleziona un metodo di pagamento",
+                ? 'Pagamento in contanti'
+                : 'Seleziona un metodo di pagamento',
               iconRest: PaymentCardIcon,
               iconSelected: PaymentCardGreenIcon,
             }}
@@ -361,7 +364,7 @@ const Checkout: React.FC = () => {
 
               <ArrowDownIcon
                 fill="#BDBDBD"
-                style={{ transform: "rotateZ(-90deg)" }}
+                style={{ transform: 'rotateZ(-90deg)' }}
               />
             </button>
           </CheckoutSelectorButton>
@@ -376,7 +379,7 @@ const Checkout: React.FC = () => {
 
           <div className="checkout-selecteditems-content">
             <span className="checkout-selecteditems-heading">{`${cartCount} ${
-              cartCount > 1 ? "prodotti" : "prodotto"
+              cartCount > 1 ? 'prodotti' : 'prodotto'
             }`}</span>
             <div className="checkout-selecteditems-items-content">
               {flatCart(cart).map((snapshot, idx) => (
@@ -441,7 +444,7 @@ const Checkout: React.FC = () => {
         <PrimaryButton
           onClick={onSubmit}
           options={{
-            title: "Conferma",
+            title: 'Conferma',
             isEnabled: interval !== undefined && (card !== undefined || cash),
             isLoading: isLoading,
             isVisible: true,
