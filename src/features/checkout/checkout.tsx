@@ -197,7 +197,7 @@ const Checkout: React.FC = () => {
     setIsLoading(false);
   };
 
-  if (cart.length && !isDone) {
+  if (!cart.length && !isDone) {
     return <Navigate to="/" replace />;
   }
 
