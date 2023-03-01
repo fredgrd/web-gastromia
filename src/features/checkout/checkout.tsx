@@ -252,7 +252,7 @@ const Checkout: React.FC = () => {
               <CalendarIcon fill="#343538" />
               <div className="checkout-selectors-timeselectorbtn-info">
                 <span className="checkout-selectors-timeselectorbtn-title">
-                  Scegli una finestra di 5m
+                  Scegli una finestra di 15m
                 </span>
                 <span className="checkout-selectors-timeselectorbtn-subtitle">
                   A partire dalle 11:00
