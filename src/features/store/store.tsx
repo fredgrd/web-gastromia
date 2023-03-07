@@ -32,9 +32,8 @@ const Store: React.FC = () => {
           />
         </div>
       </div>
-      <StoreSection title="Poké" category="poké" />
-      <StoreSection title="Crea il tuo Poké" category="Crea il tuo poké" />
-      <StoreSection title="Salads" category="salads" />
+      <StoreSection title="Bowls" category="bowls" />
+      <StoreSection title="Crea la tua bowl" category="make_your_bowl" />
       <StoreSection title="Pita" category="pita" />
       <StoreSection title="Mexican 🇲🇽" category="mexican" />
       <StoreSection title="Sides & Dips" category="sides" />
