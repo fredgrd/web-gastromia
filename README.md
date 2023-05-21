@@ -2,7 +2,7 @@
 
 ## What is Gastromia?
 
-Gastromia is a web app developed with mobile use in mind to provide a faster and more direct checkout experience to our walk-in customers. 
+Gastromia is a web app developed with mobile use in mind to provide a faster and more streamlined checkout experience to our customers. 
 
 This app is intented to support the day-to-day operations of Gastromia, a food-tech startup that manages a state-of-the-art ghost kitchen located in the center of Rome.
 
