@@ -37,3 +37,5 @@ Services:
 ### Search + Explore
 ![search](search.gif)
 
+### Card checkout + Refund
+![refund](refund.gif)
