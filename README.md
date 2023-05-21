@@ -39,3 +39,6 @@ Services:
 
 ### Card checkout + Refund
 ![refund](refund.gif)
+
+### Login + Logout
+![login](login.gif)
