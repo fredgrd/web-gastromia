@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const baseUrl = "https://api-gastromia.fly.dev";
+const baseUrl = "https://api.gastromia.com";
 
 export const fetchLocationStatus = async (): Promise<boolean> => {
   try {

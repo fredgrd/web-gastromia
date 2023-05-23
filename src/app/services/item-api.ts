@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { Item, isItems, isItem } from "../../models/item";
 
-const baseUrl = "https://api-gastromia.fly.dev";
+const baseUrl = "https://api.gastromia.com";
 
 export const fetchCategory = async (
   category: string

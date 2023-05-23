@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { ApiOperation } from "../../models/api-operation";
 import { isUser, User } from "../../models/user";
 
-const baseUrl = "https://api-gastromia.fly.dev";
+const baseUrl = "https://api.gastromia.com";
 
 // --------------------------------------------------------------------------
 // StartVerification

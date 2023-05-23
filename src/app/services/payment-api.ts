@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Card, isCards } from "../../models/card";
 
-const baseUrl = "https://api-gastromia.fly.dev";
+const baseUrl = "https://api.gastromia.com";
 
 export const createSetupIntent = async (): Promise<string | null> => {
   try {
