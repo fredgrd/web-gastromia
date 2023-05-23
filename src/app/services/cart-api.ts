@@ -5,7 +5,7 @@ import {
   isCartSnapshot,
 } from "../../models/cart-snapshot";
 
-const baseUrl = "https://api.gastromia.com";
+const baseUrl = "https://api-gastromia.fly.dev";
 
 export const fetchCartSnapshot = async (): Promise<CartSnapshot | null> => {
   try {

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { User, isUser } from '../../models/user';
 
-const baseUrl = 'https://api.gastromia.com';
+const baseUrl = 'https://api-gastromia.fly.dev';
 
 // Fetches the user document
 export const fetchUser = async (): Promise<User | null> => {

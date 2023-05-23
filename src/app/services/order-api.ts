@@ -8,7 +8,7 @@ import {
 } from "../../models/order";
 import { ApiOperation } from "../../models/api-operation";
 
-const baseUrl = "https://api.gastromia.com";
+const baseUrl = "https://api-gastromia.fly.dev";
 
 export const createOrder = async (
   data: CreateOrderData
