@@ -1,10 +1,20 @@
 ![logo](showcase/gastromia_logo.png)
 
-## What is Gastromia?
+This repository is part of a wider online ordering and kitchen management system that powers the day-to-day operations of Gastromia – a food-tech startup that operates in the realm of ghost kitchens and virtual food brands. 
 
-Gastromia is a web app developed with mobile use in mind to provide a faster and more streamlined checkout experience to our customers.
+The core components that make up the system are:
+- [web-gastromia](https://github.com/fredgrd/web-gastromia/) – Customer-facing mobile web-app
+- [hub-gastromia](https://github.com/fredgrd/hub-gastromia/) – Internal dashboard (live orders, item editing, statistics)
+- [api-gastromia](https://github.com/fredgrd/api-gastromia/) – Backend powering both web apps and connected services.
 
-This app is intented to support the day-to-day operations of Gastromia, a food-tech startup that manages a state-of-the-art ghost kitchen located in the center of Rome.
+## What is web-gastromia?
+
+Gastromia is a web app developed with mobile users in mind. Its primary goal is to provide our customers with a faster, smoother, and more streamlined checkout experience. We have optimized the app's user interface and functionality, enabling intuitive navigation, swift browsing, and effortless ordering. The app integrates with a range of services such as: 
+- Facebook's Business Platform for Whatsapp driven order status notifications
+- Stripe's secure card payment service. 
+- Twilio's Verify SMS OTP.
+
+These options were chosen to ensure a frictionless user experience while maintaining the time-to-market of the solution as short as possible.
 
 ![preview](showcase/preview.gif)
 
@@ -12,12 +22,12 @@ This app is intented to support the day-to-day operations of Gastromia, a food-t
 
 Backend:
 
-- NodeJS
+- Node.js
 - Express
-- AWS SDK
+- AWS
 - Mongoose
-- Twilio SDK
-- Stripe SDK
+- Twilio Verify
+- Stripe
 
 Frontend:
 
