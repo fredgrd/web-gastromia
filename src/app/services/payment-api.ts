@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Card, isCards } from "../../models/card";
 
-const baseUrl = "https://api.gastromia.com";
+const baseUrl = "https://api.gastromia.app";
 
 export const createSetupIntent = async (): Promise<string | null> => {
   try {
